@@ -4,18 +4,52 @@
  * Номер офиса явно не хранится.
  */
 public class OfficeFloor {
+	private class Node{
+		public Node next;		
+	}
+	
+	private Node head;
+		
+	public OfficeFloor() {
+		head = new Node();
+		head.next = head;
+	}
 
     /**
      * Создайте приватный метод получения узла по его номеру.
      */
+	private Node getNode(int index) {
+		Node temp = head;
+		for (int i = 0; i < index; i++) {
+			temp = temp.next;
+		}
+		return temp;
+	}
 	 
     /**
 	 * Создайте приватный метод добавления узла в список по номеру.
      */
+	private void addNode(Node node, int index) {
+		Node temp = head;
+		for (int i = 0; i < index; i++) {
+			temp = temp.next;
+		}
+		node.next = temp.next;		
+		temp.next = node;
+	}
 	
 	/**
 	* Создайте приватный метод удаления узла из списка по его номеру.
     */
+	private void removeNode(int index) {
+		Node temp = head;
+		for (int i = 0; i < index; i++) {
+			temp = temp.next;
+			if (i == index) {
+				temp.next = temp.next.next;				
+			}
+		}
+	}
 	
 	/**
 	* Конструктор может принимать количество офисов на этаже.
