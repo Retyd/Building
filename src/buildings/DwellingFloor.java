@@ -11,7 +11,10 @@ public class DwellingFloor {
     private Flat[] flats;
 
     public DwellingFloor(int flatsAmount) {
-
+    	this.flats = new Flat[flatsAmount];
+    	for (int i = 0; i < flatsAmount; i++) {
+    		flats[i] = new Flat();
+    	}
     }
 
     public DwellingFloor(Flat[] flats) {
