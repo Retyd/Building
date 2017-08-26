@@ -4,15 +4,46 @@
  * Номер офиса явно не хранится.
  */
 public class OfficeFloor {
-	private class Node{
-		public Node next;		
-	}
+	private static class Node{
+		Node next;
+		Office anOffice;
+	}	
 	
 	private Node head;
 		
-	public OfficeFloor() {
+	private OfficeFloor() {
 		head = new Node();
 		head.next = head;
+	}
+	
+	/**
+	* Конструктор может принимать количество офисов на этаже.
+    */ 
+	public OfficeFloor(int officeAmount) {
+		this();
+		Node current = head;		
+		for (int i = 0; i < officeAmount; i++) {			
+			Node x = new Node();
+			x.anOffice = new Office();
+			current.next = x;
+			current = x;
+		}		
+		current.next = head.next;
+	}	
+	
+	/**
+	* Конструктор может принимать массив офисов этажа.
+    */
+	public OfficeFloor(Office[] offices) {
+		this();
+		Node current = head;
+		for(int i = 0; i < offices.length; i++) {
+			Node x = new Node();
+			x.anOffice = offices[i];
+			current.next = x;			
+			current = x;
+		}
+		current.next = head.next;
 	}
 
     /**
@@ -42,26 +73,27 @@ public class OfficeFloor {
 	* Создайте приватный метод удаления узла из списка по его номеру.
     */
 	private void removeNode(int index) {
-		Node temp = head;
+		Node temp = head;		
 		for (int i = 0; i < index; i++) {
 			temp = temp.next;
-			if (i == index) {
-				temp.next = temp.next.next;				
-			}
 		}
-	}
-	
-	/**
-	* Конструктор может принимать количество офисов на этаже.
-    */ 
-	
-	/**
-	* Конструктор может принимать массив офисов этажа.
-    */
-	
+		
+		temp.next = temp.next.next;
+	}	
+		
 	/**
 	* Создайте метод получения количества офисов на этаже.
     */
+	public int getOfficesOnFloorAmount() {	
+		Node current = head; 
+		int result = 0;		
+			do {
+				current = current.next;
+				result++;
+			} while(current.next != head.next); 
+		return result;
+	}
+
 	
 	/**
 	* Создайте метод получения общей площади помещений этажа.
