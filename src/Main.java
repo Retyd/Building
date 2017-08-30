@@ -14,5 +14,6 @@ public class Main {
         
         OfficeFloor testOfficeFloor = new OfficeFloor(5);
         System.out.println(testOfficeFloor.getFloorArea());
+        System.out.println(testOfficeFloor.getRoomsOnFloorAmount());
     }
 }

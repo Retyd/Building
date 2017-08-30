@@ -98,10 +98,28 @@ public class OfficeFloor {
 	/**
 	* Создайте метод получения общей площади помещений этажа.
     */
+	public double getFloorArea() {
+		double result = 0;
+		Node current = head;
+		do {
+			current = current.next;
+			result += current.anOffice.getArea();
+		} while(current.next != head.next); 
+		return result;
+	}
 	
 	/**
 	* Создайте метод получения общего количества комнат этажа.
     */
+	public int getRoomsOnFloorAmount() {
+		int sumRooms = 0;
+		Node current = head;
+		do {
+			current = current.next;
+			sumRooms += current.anOffice.getRoomsAmount();
+		} while(current.next != head.next); 
+		return sumRooms;
+	}
 	
 	/**
 	* Создайте метод получения массива офисов этажа.
