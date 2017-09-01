@@ -13,7 +13,8 @@ public class Main {
         OfficeFloor.Node nOne = one.new Node();*/
         
         OfficeFloor testOfficeFloor = new OfficeFloor(5);
-        System.out.println(testOfficeFloor.getFloorArea());
-        System.out.println(testOfficeFloor.getRoomsOnFloorAmount());
+        /*System.out.println(testOfficeFloor.getFloorArea());
+        System.out.println(testOfficeFloor.getRoomsOnFloorAmount());*/
+        OfficeFloor testOfficeFloor2 = new OfficeFloor(testOfficeFloor.getOfficesOnFloorArray());
     }
 }

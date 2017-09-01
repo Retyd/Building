@@ -124,6 +124,15 @@ public class OfficeFloor {
 	/**
 	* Создайте метод получения массива офисов этажа.
     */
+	public Office[] getOfficesOnFloorArray() {
+		Office[] offices = new Office[getOfficesOnFloorAmount()];
+		Node current = head;
+		for (int i = 0; i < getOfficesOnFloorAmount(); i++) {
+			current = current.next;
+			offices[i] = current.anOffice;			
+		}	
+		return offices;
+	}
 	
 	/**
 	* Создайте метод получения офиса по его номеру на этаже.

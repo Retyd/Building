@@ -58,7 +58,7 @@ public class DwellingFloor {
     }
 
     /**
-     * Создайте метод получени¤ объекта квартиры, по ее номеру на этаже.
+     * Создайте метод получения объекта квартиры, по ее номеру на этаже.
      */
     public Flat getFlat (int flatIndex) {
         return flats[flatIndex];
