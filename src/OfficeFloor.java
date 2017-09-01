@@ -136,21 +136,65 @@ public class OfficeFloor {
 	
 	/**
 	* Создайте метод получения офиса по его номеру на этаже.
-    */
+    */	
+	public Office getOfficeFromFloor(int index) {
+		return getNode(index).anOffice;
+	}
+	/* или
+	public Office getOfficeFromFloor(int index) {		
+		Node current = head;		
+		for (int i = 0; i <= index; i++) {
+			current = current.next;			
+		}
+		return current.anOffice;
+	}
+	*/
 	
 	/**
 	* Создайте метод изменения офиса по его номеру на этаже и ссылке на обновленный офис.
     */
+	public void setOfficeOnFloor(int index, Office newOffice) {
+		getNode(index).anOffice = newOffice;
+	}
+	/* или: 
+	 * public void setOfficeOnFloor (int index, Office newOffice) {	 
+		Node current = head;		
+		for (int i = 0; i <= index; i++) {
+			current = current.next;			
+		}
+		current.anOffice = newOffice;
+	}
+	*/
 	
 	/**
 	* Создайте метод добавления нового офиса на этаже по будущему номеру офиса.
     */
+	public void addOfficeOnFloor(int index) {
+		Node newOffice = new Node();
+		addNode(newOffice, index);
+	}
 	
 	/**
 	* Создайте метод удаления офиса по его номеру на этаже.
     */
+	public void removeOfficeOnFloor(int index) {
+		removeNode(index);
+	}
 	
 	/**
 	* Создайте метод getBestSpace() получения самого большого по площади офиса этажа.
 	*/
+	public Office getBestSpace() {
+		float bestSpace = 0;
+		Office officeBestSpace = null;
+		Node current = head;
+		for (int i = 0; i <= getRoomsOnFloorAmount(); i++) {
+			current = current.next;
+			if(current.anOffice.getArea() > bestSpace) {
+				bestSpace = current.anOffice.getArea();
+				officeBestSpace = current.anOffice;
+			}
+		}
+		return officeBestSpace;
+	}
 }
