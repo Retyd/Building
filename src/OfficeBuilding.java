@@ -266,7 +266,7 @@ public class OfficeBuilding {
 		for (int i = 1; i < getOfficesFloorsAmount(); i++) {
 			current = current.next;
 			System.arraycopy(current.anOfficeFloor.getOfficesOnFloorArray(), 0, nonSortedOffices, sum, current.anOfficeFloor.getOfficesOnFloorAmount());
-	    	sum += current.anOfficeFloor.getOfficesOnFloorAmount();	    	
+	    		sum += current.anOfficeFloor.getOfficesOnFloorAmount();	    	
 		}
 		Arrays.sort(nonSortedOffices, new Comparator<Office>() {
 			@Override
