@@ -1,8 +1,7 @@
 import java.util.Arrays;
 import java.util.Comparator;
 
-import buildings.DwellingFloor;
-import buildings.Flat;
+import UserExceptions.SpaceIndexOutOfBoundsException;
 
 /**
  * Создайте класс OfficeBuilding офисного здания.
@@ -19,7 +18,7 @@ public class OfficeBuilding {
 	
 	private Node head;
 		
-	private OfficeBuilding() {
+	private OfficeBuilding() {		
 		head = new Node();
 		head.next = head;
 		head.previous = head;
@@ -28,10 +27,10 @@ public class OfficeBuilding {
 	/**
 	* Конструктор может принимать количество этажей и массив количества офисов по этажам.
 	*/
-	public OfficeBuilding(int flatsIndex, int[] officesAmountOnFloor) {
+	public OfficeBuilding(int index, int[] officesAmountOnFloor) {
 		this();
 		Node current = head;
-		for (int i = 0; i < flatsIndex; i++) {
+		for (int i = 0; i < index; i++) {
 			Node x = new Node();
 			current.next = x;
 			x.previous = current;
@@ -163,6 +162,9 @@ public class OfficeBuilding {
 	* Создайте метод получения объекта этажа по его номеру в здании.
 	*/
 	public OfficeFloor getOfficeFloor(int index) {
+		if ((index >= getOfficesFloorsAmount())||(index < 0)) {
+			throw new SpaceIndexOutOfBoundsException();
+		}
 		return getNode(index).anOfficeFloor;
 	}
 	
@@ -170,6 +172,9 @@ public class OfficeBuilding {
 	* Создайте метод изменения этажа по его номеру в здании и ссылке на обновленный этаж.
 	*/
 	public void setOfficeFloor(int index, OfficeFloor newOfficeFloor) {
+		if ((index >= getOfficesFloorsAmount())||(index < 0)) {
+			throw new SpaceIndexOutOfBoundsException();
+		}
 		getNode(index).anOfficeFloor = newOfficeFloor;
 	}
 	
@@ -177,6 +182,9 @@ public class OfficeBuilding {
 	* Создайте метод получения объекта офиса по его номеру в офисном здании.
 	*/
 	public Office getOfficeFromBuilding(int index) {
+		if ((index >= getOfficesGeneralAmount())||(index < 0)) {
+			throw new SpaceIndexOutOfBoundsException();
+		}
 		Node current = head;
 		int sum = 0;
 		for (int i = 0; i < getOfficesFloorsAmount(); i++) {
@@ -194,6 +202,9 @@ public class OfficeBuilding {
 	* Создайте метод изменения объекта офиса по его номеру в доме и ссылке типа офиса.
 	*/
 	public void setOfficeInBuildind(int index, Office newOffice) {
+		if ((index >= getOfficesGeneralAmount())||(index < 0)) {
+			throw new SpaceIndexOutOfBoundsException();
+		}
 		Node current = head;
 		int sum = 0;
 		for (int i = 0; i < getOfficesFloorsAmount(); i++) {
@@ -210,6 +221,9 @@ public class OfficeBuilding {
 	* Создайте метод добавления офиса в здание по номеру офиса в здании и ссылке на офис.
 	*/
 	public void addOfficeInBuildind(int index, Office newOffice) {
+		if ((index >= getOfficesGeneralAmount())||(index < 0)) {
+			throw new SpaceIndexOutOfBoundsException();
+		}
 		Node current = head;
 		int sum = 0;
 		for (int i = 0; i < getOfficesFloorsAmount(); i++) {
@@ -219,13 +233,17 @@ public class OfficeBuilding {
 				int indexOnFloor = current.anOfficeFloor.getOfficesOnFloorAmount() - (sum - index);
 				current.anOfficeFloor.addOfficeOnFloor(indexOnFloor);
 				current.anOfficeFloor.setOfficeOnFloor(indexOnFloor, newOffice);
-			}
+				}
+		}
 	}
 	
 	/**
 	* Создайте метод удаления офиса по его номеру в здании.
 	*/
 	public void removeOfficeInBuildind(int index) {
+		if ((index >= getOfficesGeneralAmount())||(index < 0)) {
+			throw new SpaceIndexOutOfBoundsException();
+		}
 		Node current = head;
 		int sum = 0;
 		for (int i = 0; i < getOfficesFloorsAmount(); i++) {
@@ -266,7 +284,7 @@ public class OfficeBuilding {
 		for (int i = 1; i < getOfficesFloorsAmount(); i++) {
 			current = current.next;
 			System.arraycopy(current.anOfficeFloor.getOfficesOnFloorArray(), 0, nonSortedOffices, sum, current.anOfficeFloor.getOfficesOnFloorAmount());
-	    	sum += current.anOfficeFloor.getOfficesOnFloorAmount();	    	
+			sum += current.anOfficeFloor.getOfficesOnFloorAmount();	    	
 		}
 		Arrays.sort(nonSortedOffices, new Comparator<Office>() {
 			@Override

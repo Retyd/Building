@@ -1,3 +1,5 @@
+import UserExceptions.FloorIndexOutOfBoundsException;
+
 /**
  * Создайте класс OfficeFloor этажа офисного здания.
  * Работа класса должна быть основана на односвязном циклическом списке офисов с выделенной головой.
@@ -76,8 +78,7 @@ public class OfficeFloor {
 		Node temp = head;		
 		for (int i = 0; i < index; i++) {
 			temp = temp.next;
-		}
-		
+		}		
 		temp.next = temp.next.next;
 	}	
 		
@@ -138,6 +139,9 @@ public class OfficeFloor {
 	* Создайте метод получения офиса по его номеру на этаже.
     */	
 	public Office getOfficeFromFloor(int index) {
+		if ((index >= getOfficesOnFloorAmount())||(index < 0)) {
+			throw new FloorIndexOutOfBoundsException();
+		}
 		return getNode(index).anOffice;
 	}
 	
@@ -145,6 +149,9 @@ public class OfficeFloor {
 	* Создайте метод изменения офиса по его номеру на этаже и ссылке на обновленный офис.
     */
 	public void setOfficeOnFloor(int index, Office newOffice) {
+		if ((index >= getOfficesOnFloorAmount())||(index < 0)) {
+			throw new FloorIndexOutOfBoundsException();
+		}
 		getNode(index).anOffice = newOffice;
 	}
 	
@@ -152,6 +159,9 @@ public class OfficeFloor {
 	* Создайте метод добавления нового офиса на этаже по будущему номеру офиса.
     */
 	public void addOfficeOnFloor(int index) {
+		if ((index >= getOfficesOnFloorAmount())||(index < 0)) {
+			throw new FloorIndexOutOfBoundsException();
+		}
 		Node newOffice = new Node();
 		addNode(newOffice, index);
 	}
@@ -160,6 +170,9 @@ public class OfficeFloor {
 	* Создайте метод удаления офиса по его номеру на этаже.
     */
 	public void removeOfficeOnFloor(int index) {
+		if ((index >= getOfficesOnFloorAmount())||(index < 0)) {
+			throw new FloorIndexOutOfBoundsException();
+		}
 		removeNode(index);
 	}
 	
@@ -167,7 +180,7 @@ public class OfficeFloor {
 	* Создайте метод getBestSpace() получения самого большого по площади офиса этажа.
 	*/
 	public Office getBestSpace() {
-		float bestSpace = 0;
+		double bestSpace = 0;
 		Office officeBestSpace = null;
 		Node current = head;
 		for (int i = 0; i <= getRoomsOnFloorAmount(); i++) {
