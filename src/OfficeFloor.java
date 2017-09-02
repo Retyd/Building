@@ -140,15 +140,6 @@ public class OfficeFloor {
 	public Office getOfficeFromFloor(int index) {
 		return getNode(index).anOffice;
 	}
-	/* или
-	public Office getOfficeFromFloor(int index) {		
-		Node current = head;		
-		for (int i = 0; i <= index; i++) {
-			current = current.next;			
-		}
-		return current.anOffice;
-	}
-	*/
 	
 	/**
 	* Создайте метод изменения офиса по его номеру на этаже и ссылке на обновленный офис.
@@ -156,15 +147,6 @@ public class OfficeFloor {
 	public void setOfficeOnFloor(int index, Office newOffice) {
 		getNode(index).anOffice = newOffice;
 	}
-	/* или: 
-	 * public void setOfficeOnFloor (int index, Office newOffice) {	 
-		Node current = head;		
-		for (int i = 0; i <= index; i++) {
-			current = current.next;			
-		}
-		current.anOffice = newOffice;
-	}
-	*/
 	
 	/**
 	* Создайте метод добавления нового офиса на этаже по будущему номеру офиса.

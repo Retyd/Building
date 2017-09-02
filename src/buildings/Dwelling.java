@@ -4,15 +4,16 @@ import java.util.Comparator;
 
 /**
  * Создайте класс Dwelling жилого здания, основанный на массиве этажей здания.
- *Номер квартиры явно не хранится.
- *Нумерация квартир в доме сквозная и начинается с нуля.
- *Конструктор может принимать количество этажей и массив количества квартир по этажам.
- *Конструктор может принимать массив этажей дома.
+ * Номер квартиры явно не хранится.
+ * Нумерация квартир в доме сквозная и начинается с нуля. 
  */
 public class Dwelling {
     private DwellingFloor[] floors;
 	public int length;
-
+	
+	/**
+	 * Конструктор может принимать количество этажей и массив количества квартир по этажам.
+	 */
     public Dwelling (int floorsAmount, int[] flatsAmountOnFloor) {
         this.floors = new DwellingFloor[floorsAmount];
 
@@ -21,6 +22,9 @@ public class Dwelling {
         }
     }
 
+    /**
+     * Конструктор может принимать массив этажей дома.
+     */
     public Dwelling (DwellingFloor[] floors) {
         this.floors = floors;
     }
@@ -37,11 +41,9 @@ public class Dwelling {
      */
     public int getFlatsAmount () {
         int sum = 0;
-
         for (int i = 0; i < floors.length; i++) {
             sum += floors[i].getFlatsAmount();
         }
-
         return sum;
     }
 
@@ -50,11 +52,9 @@ public class Dwelling {
      */
     public float getFlatsArea () {
         float sum = 0;
-
         for (int i = 0; i < floors.length; i++) {
             sum += floors[i].getFlatsGeneralArea();
         }
-
         return sum;
     }
 
@@ -63,11 +63,9 @@ public class Dwelling {
      */
     public int getRoomsGeneralAmount () {
         int sum = 0;
-
         for (int i = 0; i < floors.length; i++) {
             sum += floors[i].getRoomsGeneralAmount();
         }
-
         return sum;
     }
 
@@ -79,7 +77,7 @@ public class Dwelling {
     }
 
     /**
-     * Создайте метод получения объекта этажа, по его номеру в доме.
+     * Создайте метод получения объекта этажа по его номеру в доме.
      */
     public DwellingFloor getFloorByIndex (int index) {
         return floors[index];
@@ -97,7 +95,6 @@ public class Dwelling {
      */
     public Flat getFlat (int index) {
         int sum = 0;
-
         for (int i = 0; i < floors.length; i++){
             DwellingFloor floor = floors[i];
             int flatsAmount = floor.getFlatsAmount();
@@ -114,7 +111,6 @@ public class Dwelling {
      */
     public void setFlat (int index, Flat oneFlat) {
     	int sum = 0;
-
         for (int i = 0; i < floors.length; i++){
             DwellingFloor floor = floors[i];
             int flatsAmount = floor.getFlatsAmount();
@@ -128,11 +124,10 @@ public class Dwelling {
     
     /**
      * Создайте метод добавления квартиры в дом по номеру квартиры в доме и ссылке на квартиру
-     * (количество этажей в доме при этом не увеличиваетс¤).    
+     * (количество этажей в доме при этом не увеличивается).    
      */
     public void addFlat (int index, Flat oneFlat) {    	
     	int sum = 0;
-
         for (int i = 0; i < floors.length; i++){
             DwellingFloor floor = floors[i];
             int flatsAmount = floor.getFlatsAmount();
@@ -151,7 +146,6 @@ public class Dwelling {
      */    
     public void removeFlat (int index) {
     	int sum = 0;
-
         for (int i = 0; i < floors.length; i++){
             DwellingFloor floor = floors[i];
             int flatsAmount = floor.getFlatsAmount();
@@ -170,13 +164,10 @@ public class Dwelling {
     public Flat getBestSpace () {    	
     	if (floors.length == 0) {
     		return null;
-    	}    	
-    	  	
-    	Flat bestFlat = floors[0].getBestSpace();
-    	
+    	}    	  	
+    	Flat bestFlat = floors[0].getBestSpace();    	
     	for (int i = 1; i < floors.length; i++) {
-    		Flat tempFlat = getBestSpace();
-    		
+    		Flat tempFlat = getBestSpace();    		
     		if (tempFlat.getArea() > bestFlat.getArea()) {
     			bestFlat = tempFlat;
     		}    		
@@ -190,15 +181,12 @@ public class Dwelling {
      */
     public Flat[] getSortedFlats () {
     	Flat[] nonSortedFlats = new Flat[getFlatsAmount()]; 
-    	int sum = 0;
-    	
+    	int sum = 0;    	
     	for (int i = 0; i < floors.length; i++) {    		
     		System.arraycopy(floors[i].getFlats(), 0, nonSortedFlats, sum, floors[i].getFlatsAmount());
     		sum += floors[i].getFlatsAmount();
-    	}
-    	
+    	}    	
     	Arrays.sort(nonSortedFlats, new Comparator<Flat>() {
-
 			@Override
 			public int compare(Flat arg0, Flat arg1) {
 				if (arg0.getArea() == arg1.getArea()) {
@@ -209,11 +197,7 @@ public class Dwelling {
 					return -1;
 				}				
 			}    		
-    	});
-    	
+    	});    	
     	return nonSortedFlats;
-    }
-    
-}   
-
-    
+    }    
+}

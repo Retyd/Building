@@ -2,14 +2,15 @@ package buildings;
 
 /**
  * Создайте класс DwellingFloor этажа жилого здания, основанный на массиве квартир.
- *Номер квартиры явно не хранится.
- *Нумерация квартир на этаже сквозная и начинается с нуля.
- *Конструктор может принимать количество квартир на этаже.
- *Конструктор может принимать массив квартир этажа.
+ * Номер квартиры явно не хранится.
+ * Нумерация квартир на этаже сквозная и начинается с нуля.
  */
 public class DwellingFloor {
     private Flat[] flats;
-
+    
+    /**
+     * Конструктор может принимать количество квартир на этаже.
+     */
     public DwellingFloor(int flatsAmount) {
     	this.flats = new Flat[flatsAmount];
     	for (int i = 0; i < flatsAmount; i++) {
@@ -17,6 +18,9 @@ public class DwellingFloor {
     	}
     }
 
+    /**
+     * Конструктор может принимать массив квартир этажа.
+     */
     public DwellingFloor(Flat[] flats) {
         this.flats = flats;
     }
@@ -76,17 +80,13 @@ public class DwellingFloor {
      */
     public void addFlat (int futureFlatIndex) {
         Flat[] newFlats = new Flat[flats.length+1];
-
         for (int i = 0; i < flats.length; i++) {
             newFlats[i] = flats[i];
         }
-
         for (int i = newFlats.length; i >= futureFlatIndex; i--) {
             newFlats[i] = newFlats[i-1];
         }
-
         newFlats[futureFlatIndex] = new Flat();
-
         flats = newFlats;
     }
 
@@ -95,15 +95,12 @@ public class DwellingFloor {
      */
     public void removeFlat (int flatIndex) {
         Flat[] newFlats = new Flat[flats.length-1];
-
         for (int i = 0; i < flatIndex; i++) {
             newFlats[i] = flats[i];
         }
-
         for (int i = flatIndex+1; i < flats.length; i++) {
             newFlats[i-1] = flats[i];
         }
-
         flats = newFlats;
     }
 
@@ -113,7 +110,6 @@ public class DwellingFloor {
     public Flat getBestSpace () {
         float bestSpace = 0;
         Flat flatBestSpace = null;
-
         for (int i = 0; i < flats.length; i++) {
             if (flats[i].getArea() > bestSpace) {
                 bestSpace = flats[i].getArea();
