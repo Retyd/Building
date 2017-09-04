@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Comparator;
 
-import UserExceptions.SpaceIndexOutOfBoundsException;
+import exceptions.SpaceIndexOutOfBoundsException;
 
 /**
  * Создайте класс OfficeBuilding офисного здания.

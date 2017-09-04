@@ -1,5 +1,5 @@
-import UserExceptions.InvalidRoomsCountException;
-import UserExceptions.InvalidSpaceAreaException;
+import exceptions.InvalidRoomsCountException;
+import exceptions.InvalidSpaceAreaException;
 
 /**
  * Создайте класс Office офиса офисного здания.

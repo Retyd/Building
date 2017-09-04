@@ -1,4 +1,4 @@
-import UserExceptions.FloorIndexOutOfBoundsException;
+import exceptions.FloorIndexOutOfBoundsException;
 
 /**
  * Создайте класс OfficeFloor этажа офисного здания.
