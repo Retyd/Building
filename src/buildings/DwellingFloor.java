@@ -1,5 +1,8 @@
 package buildings;
 
+import exceptions.FloorIndexOutOfBoundsException;
+import exceptions.SpaceIndexOutOfBoundsException;
+
 /**
  * Создайте класс DwellingFloor этажа жилого здания, основанный на массиве квартир.
  * Номер квартиры явно не хранится.
@@ -64,41 +67,53 @@ public class DwellingFloor {
     /**
      * Создайте метод получения объекта квартиры, по ее номеру на этаже.
      */
-    public Flat getFlat (int flatIndex) {
-        return flats[flatIndex];
+    public Flat getFlat (int index) {
+    	if ((index >= flats.length)||(index < 0)) {
+    		throw new SpaceIndexOutOfBoundsException();
+    	}
+        return flats[index];
     }
 
     /**
      * Создайте метод изменения квартиры по ее номеру на этаже и ссылке на новую квартиру.
      */
-    public void setFlat (int flatIndex, Flat oneFlat) {
-        this.flats[flatIndex] = oneFlat;
+    public void setFlat (int index, Flat oneFlat) {
+    	if ((index >= flats.length)||(index < 0)) {
+			throw new SpaceIndexOutOfBoundsException();
+		}
+        this.flats[index] = oneFlat;
     }
 
     /**
      * Создайте метод добавления новой квартиры на этаже по будущему номеру квартиры.
      */
-    public void addFlat (int futureFlatIndex) {
+    public void addFlat (int index) {
+    	if ((index >= flats.length)||(index < 0)) {
+			throw new SpaceIndexOutOfBoundsException();
+		}
         Flat[] newFlats = new Flat[flats.length+1];
         for (int i = 0; i < flats.length; i++) {
             newFlats[i] = flats[i];
         }
-        for (int i = newFlats.length; i >= futureFlatIndex; i--) {
+        for (int i = newFlats.length; i >= index; i--) {
             newFlats[i] = newFlats[i-1];
         }
-        newFlats[futureFlatIndex] = new Flat();
+        newFlats[index] = new Flat();
         flats = newFlats;
     }
 
     /**
      * Создайте метод удаления квартиры по ее номеру на этаже.
      */
-    public void removeFlat (int flatIndex) {
+    public void removeFlat (int index) {
+    	if ((index >= flats.length)||(index < 0)) {
+			throw new SpaceIndexOutOfBoundsException();
+		}
         Flat[] newFlats = new Flat[flats.length-1];
-        for (int i = 0; i < flatIndex; i++) {
+        for (int i = 0; i < index; i++) {
             newFlats[i] = flats[i];
         }
-        for (int i = flatIndex+1; i < flats.length; i++) {
+        for (int i = index+1; i < flats.length; i++) {
             newFlats[i-1] = flats[i];
         }
         flats = newFlats;
@@ -108,7 +123,7 @@ public class DwellingFloor {
      * Создайте метод getBestSpace() получения самой большой по площади квартиры этажа.
      */
     public Flat getBestSpace () {
-        float bestSpace = 0;
+        double bestSpace = 0;
         Flat flatBestSpace = null;
         for (int i = 0; i < flats.length; i++) {
             if (flats[i].getArea() > bestSpace) {

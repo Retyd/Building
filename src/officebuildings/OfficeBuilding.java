@@ -1,6 +1,8 @@
+package officebuildings;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import exceptions.FloorIndexOutOfBoundsException;
 import exceptions.SpaceIndexOutOfBoundsException;
 
 /**
@@ -163,7 +165,7 @@ public class OfficeBuilding {
 	*/
 	public OfficeFloor getOfficeFloor(int index) {
 		if ((index >= getOfficesFloorsAmount())||(index < 0)) {
-			throw new SpaceIndexOutOfBoundsException();
+			throw new FloorIndexOutOfBoundsException();
 		}
 		return getNode(index).anOfficeFloor;
 	}
@@ -173,7 +175,7 @@ public class OfficeBuilding {
 	*/
 	public void setOfficeFloor(int index, OfficeFloor newOfficeFloor) {
 		if ((index >= getOfficesFloorsAmount())||(index < 0)) {
-			throw new SpaceIndexOutOfBoundsException();
+			throw new FloorIndexOutOfBoundsException();
 		}
 		getNode(index).anOfficeFloor = newOfficeFloor;
 	}
@@ -221,7 +223,7 @@ public class OfficeBuilding {
 	* Создайте метод добавления офиса в здание по номеру офиса в здании и ссылке на офис.
 	*/
 	public void addOfficeInBuildind(int index, Office newOffice) {
-		if ((index >= getOfficesGeneralAmount())||(index < 0)) {
+		if ((index > getOfficesGeneralAmount())||(index < -1)) {
 			throw new SpaceIndexOutOfBoundsException();
 		}
 		Node current = head;

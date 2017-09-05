@@ -1,4 +1,4 @@
-package UserExceptions;
+package exceptions;
 /**
  * ќпишите следующие  классы ошибок.
  * ќшибка некорретной площади помещени€ InvalidSpaceAreaException (необъ€вл€емое, расшир€ет IllegalArgumentException).

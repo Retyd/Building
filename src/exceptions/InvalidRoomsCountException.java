@@ -1,4 +1,4 @@
-package UserExceptions;
+package exceptions;
 /**
  * ќпишите следующие  классы ошибок.
  * ќшибка некорретного количества комнат в помещении InvalidRoomsCountException (необъ€вл€емое исключение, расшир€ет IllegalArgumentException).

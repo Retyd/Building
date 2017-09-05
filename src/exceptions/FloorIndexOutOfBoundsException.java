@@ -1,4 +1,4 @@
-package UserExceptions;
+package exceptions;
 /**
  * ќпишите следующие  классы ошибок.
  * ќшибка выхода за границы номеров этажей FloorIndexOutOfBoundsException (необъ€вл€емое, расшир€ет IndexOutOfBoundsException).

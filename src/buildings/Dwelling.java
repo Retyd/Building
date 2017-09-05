@@ -2,6 +2,9 @@ package buildings;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import exceptions.FloorIndexOutOfBoundsException;
+import exceptions.SpaceIndexOutOfBoundsException;
+
 /**
  * Создайте класс Dwelling жилого здания, основанный на массиве этажей здания.
  * Номер квартиры явно не хранится.
@@ -80,6 +83,9 @@ public class Dwelling {
      * Создайте метод получения объекта этажа по его номеру в доме.
      */
     public DwellingFloor getFloorByIndex (int index) {
+    	if ((index >= floors.length)||(index < 0)) {
+			throw new FloorIndexOutOfBoundsException();
+		}
         return floors[index];
     }
 
@@ -87,6 +93,9 @@ public class Dwelling {
      * Создайте метод изменения этажа по его номеру в доме и ссылке на обновленный этаж.
      */
     public void setFloor (int index, DwellingFloor oneFloor) {
+    	if ((index >= floors.length)||(index < 0)) {
+			throw new FloorIndexOutOfBoundsException();
+		}
         this.floors[index] = oneFloor;
     }
 
@@ -94,6 +103,9 @@ public class Dwelling {
      * Создайте метод получения объекта квартиры по ее номеру в доме.
      */
     public Flat getFlat (int index) {
+    	if ((index >= getFlatsAmount())||(index < 0)) {
+			throw new SpaceIndexOutOfBoundsException();
+		}
         int sum = 0;
         for (int i = 0; i < floors.length; i++){
             DwellingFloor floor = floors[i];
@@ -110,6 +122,9 @@ public class Dwelling {
      * Создайте метод изменения объекта квартиры по ее номеру в доме и ссылке типа квартиры.
      */
     public void setFlat (int index, Flat oneFlat) {
+    	if ((index >= getFlatsAmount())||(index < 0)) {
+			throw new SpaceIndexOutOfBoundsException();
+		}
     	int sum = 0;
         for (int i = 0; i < floors.length; i++){
             DwellingFloor floor = floors[i];
@@ -126,7 +141,10 @@ public class Dwelling {
      * Создайте метод добавления квартиры в дом по номеру квартиры в доме и ссылке на квартиру
      * (количество этажей в доме при этом не увеличивается).    
      */
-    public void addFlat (int index, Flat oneFlat) {    	
+    public void addFlat (int index, Flat oneFlat) {    
+    	if ((index > getFlatsAmount())||(index < -1)) {
+			throw new SpaceIndexOutOfBoundsException();
+		}
     	int sum = 0;
         for (int i = 0; i < floors.length; i++){
             DwellingFloor floor = floors[i];
@@ -145,6 +163,9 @@ public class Dwelling {
      * Создайте метод удаления квартиры по ее номеру в доме.
      */    
     public void removeFlat (int index) {
+    	if ((index >= getFlatsAmount())||(index < 0)) {
+			throw new SpaceIndexOutOfBoundsException();
+		}
     	int sum = 0;
         for (int i = 0; i < floors.length; i++){
             DwellingFloor floor = floors[i];

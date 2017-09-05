@@ -1,4 +1,4 @@
-package UserExceptions;
+package exceptions;
 /**
  * ќпишите следующие  классы ошибок.
  * ќшибка выхода за границы номеров помещений SpaceIndexOutOfBoundsException (необъ€вл€емое исключение, расшир€ет IndexOutOfBoundsException).

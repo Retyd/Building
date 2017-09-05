@@ -1,30 +1,46 @@
 package buildings;
 
+import exceptions.InvalidRoomsCountException;
+import exceptions.InvalidSpaceAreaException;
+import interfaces.Space;
+
 /**
  * Создайте класс Flat квартиры жилого дома.
- *Квартира не хранит свой номер.
- *Разные квартиры могут иметь разную площадь.
- *Разные квартиры могут иметь разное количество комнат.
- *Конструктор по умолчанию создает квартиру из 2 комнат площадью 50 кв.м. (эти числа должны быть константами в классе)
- *Конструктор может принимать площадь квартиры (создается квартира с 2 комнатами).
- *Конструктор может принимать площадь квартиры и количество комнат.
+ * Квартира не хранит свой номер.
+ * Разные квартиры могут иметь разную площадь.
+ * Разные квартиры могут иметь разное количество комнат.
  */
-public class Flat {
+public class Flat implements Space {
         public static final float DEFAULT_AREA = 50;
         public static final int DEFAULT_AMOUNTROOMS = 2;
 
-        private float area;
+        private double area;
         private int roomsAmount;
 
+        /**
+         * Конструктор по умолчанию создает квартиру из 2 комнат площадью 50 кв.м. (эти числа должны быть константами в классе)
+         */
         public Flat () {
             this(DEFAULT_AREA, DEFAULT_AMOUNTROOMS);
         }
 
-        public Flat (float area) {
+        /**
+         * Конструктор может принимать площадь квартиры (создается квартира с 2 комнатами).
+         */
+        public Flat (double area) {
            this(area, DEFAULT_AMOUNTROOMS);
         }
-
-        public Flat (float area, int roomsAmount) {
+        
+        /**
+         * Конструктор может принимать площадь квартиры и количество комнат.
+         */
+        public Flat (double area, int roomsAmount) {
+        	if (area <= 0) {
+        		throw new InvalidSpaceAreaException();
+        	}
+        	if (roomsAmount <= 0) {
+        		throw new InvalidRoomsCountException();
+        	}
             this.area = area;
             this.roomsAmount = roomsAmount;
         }
@@ -39,14 +55,17 @@ public class Flat {
         /**
          * Создайте метод получения площади квартиры.
          */
-        public float getArea() {
+        public double getArea() {
             return area;
         }
 
         /**
          * Создайте метод изменения площади квартиры.
          */
-        public void setArea (float area) {
+        public void setArea (double area) {
+        	if (area <= 0) {
+        		throw new InvalidSpaceAreaException();
+        	}
             this.area = area;
         }
 
@@ -54,6 +73,9 @@ public class Flat {
          * Создайте метод изменения количества комнат в квартире.
          */
         public void setRoomsAmount(int roomsAmount) {
+        	if (roomsAmount <= 0) {
+        		throw new InvalidRoomsCountException();
+        	}
             this.roomsAmount = roomsAmount;
         }
 }

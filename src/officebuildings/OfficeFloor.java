@@ -1,4 +1,5 @@
-import exceptions.FloorIndexOutOfBoundsException;
+package officebuildings;
+import exceptions.SpaceIndexOutOfBoundsException;
 
 /**
  * Создайте класс OfficeFloor этажа офисного здания.
@@ -140,7 +141,7 @@ public class OfficeFloor {
     */	
 	public Office getOfficeFromFloor(int index) {
 		if ((index >= getOfficesOnFloorAmount())||(index < 0)) {
-			throw new FloorIndexOutOfBoundsException();
+			throw new SpaceIndexOutOfBoundsException();
 		}
 		return getNode(index).anOffice;
 	}
@@ -150,7 +151,7 @@ public class OfficeFloor {
     */
 	public void setOfficeOnFloor(int index, Office newOffice) {
 		if ((index >= getOfficesOnFloorAmount())||(index < 0)) {
-			throw new FloorIndexOutOfBoundsException();
+			throw new SpaceIndexOutOfBoundsException();
 		}
 		getNode(index).anOffice = newOffice;
 	}
@@ -160,7 +161,7 @@ public class OfficeFloor {
     */
 	public void addOfficeOnFloor(int index) {
 		if ((index >= getOfficesOnFloorAmount())||(index < 0)) {
-			throw new FloorIndexOutOfBoundsException();
+			throw new SpaceIndexOutOfBoundsException();
 		}
 		Node newOffice = new Node();
 		addNode(newOffice, index);
@@ -171,7 +172,7 @@ public class OfficeFloor {
     */
 	public void removeOfficeOnFloor(int index) {
 		if ((index >= getOfficesOnFloorAmount())||(index < 0)) {
-			throw new FloorIndexOutOfBoundsException();
+			throw new SpaceIndexOutOfBoundsException();
 		}
 		removeNode(index);
 	}
