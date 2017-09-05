@@ -1,7 +1,7 @@
-package officebuildings;
+package buildings.office;
+import buildings.Space;
 import exceptions.InvalidRoomsCountException;
 import exceptions.InvalidSpaceAreaException;
-import interfaces.Space;
 
 /**
  * Создайте класс Office офиса офисного здания.
@@ -71,7 +71,7 @@ public class Office implements Space {
     /**
      * Создайте метод изменения площади офиса.
      */
-    public void setArea (double area) {
+    public void setArea(double area) {
     	if (area <= 0) {
     		throw new InvalidSpaceAreaException();
     	}

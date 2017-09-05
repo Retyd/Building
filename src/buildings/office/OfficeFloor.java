@@ -1,4 +1,6 @@
-package officebuildings;
+package buildings.office;
+import buildings.Floor;
+import buildings.Space;
 import exceptions.SpaceIndexOutOfBoundsException;
 
 /**
@@ -6,7 +8,7 @@ import exceptions.SpaceIndexOutOfBoundsException;
  * Работа класса должна быть основана на односвязном циклическом списке офисов с выделенной головой.
  * Номер офиса явно не хранится.
  */
-public class OfficeFloor {
+public class OfficeFloor implements Floor {
 	private static class Node{
 		Node next;
 		Office anOffice;
@@ -86,7 +88,7 @@ public class OfficeFloor {
 	/**
 	* Создайте метод получения количества офисов на этаже.
     */
-	public int getOfficesOnFloorAmount() {	
+	public int getSpacesAmount() {	
 		Node current = head; 
 		int result = 0;		
 			do {
@@ -100,7 +102,7 @@ public class OfficeFloor {
 	/**
 	* Создайте метод получения общей площади помещений этажа.
     */
-	public double getFloorArea() {
+	public double getSpacesArea() {
 		double result = 0;
 		Node current = head;
 		do {
@@ -113,25 +115,25 @@ public class OfficeFloor {
 	/**
 	* Создайте метод получения общего количества комнат этажа.
     */
-	public int getRoomsOnFloorAmount() {
-		int sumRooms = 0;
+	public int getRoomsAmount() {
+		int result = 0;
 		Node current = head;
 		do {
 			current = current.next;
-			sumRooms += current.anOffice.getRoomsAmount();
+			result += current.anOffice.getRoomsAmount();
 		} while(current.next != head.next); 
-		return sumRooms;
+		return result;
 	}
 	
 	/**
 	* Создайте метод получения массива офисов этажа.
     */
-	public Office[] getOfficesOnFloorArray() {
-		Office[] offices = new Office[getOfficesOnFloorAmount()];
+	public Space[] getSpaceArray() {
+		Office[] offices = new Office[getSpacesAmount()];
 		Node current = head;
-		for (int i = 0; i < getOfficesOnFloorAmount(); i++) {
+		for (int i = 0; i < getSpacesAmount(); i++) {
 			current = current.next;
-			offices[i] = current.anOffice;			
+			offices[i] = (Office) current.anOffice;			
 		}	
 		return offices;
 	}
@@ -139,8 +141,8 @@ public class OfficeFloor {
 	/**
 	* Создайте метод получения офиса по его номеру на этаже.
     */	
-	public Office getOfficeFromFloor(int index) {
-		if ((index >= getOfficesOnFloorAmount())||(index < 0)) {
+	public Space getSpace(int index) {
+		if ((index >= getSpacesAmount())||(index < 0)) {
 			throw new SpaceIndexOutOfBoundsException();
 		}
 		return getNode(index).anOffice;
@@ -149,29 +151,30 @@ public class OfficeFloor {
 	/**
 	* Создайте метод изменения офиса по его номеру на этаже и ссылке на обновленный офис.
     */
-	public void setOfficeOnFloor(int index, Office newOffice) {
-		if ((index >= getOfficesOnFloorAmount())||(index < 0)) {
+	public void setSpace(int index, Space newOffice) {
+		if ((index >= getSpacesAmount())||(index < 0)) {
 			throw new SpaceIndexOutOfBoundsException();
 		}
-		getNode(index).anOffice = newOffice;
+		getNode(index).anOffice = (Office) newOffice;
 	}
 	
 	/**
 	* Создайте метод добавления нового офиса на этаже по будущему номеру офиса.
     */
-	public void addOfficeOnFloor(int index) {
-		if ((index >= getOfficesOnFloorAmount())||(index < 0)) {
+	public void addSpace(int index, Space anOffice) {
+		if ((index >= getSpacesAmount())||(index < 0)) {
 			throw new SpaceIndexOutOfBoundsException();
 		}
 		Node newOffice = new Node();
+		newOffice.anOffice = (Office) anOffice;
 		addNode(newOffice, index);
 	}
 	
 	/**
 	* Создайте метод удаления офиса по его номеру на этаже.
     */
-	public void removeOfficeOnFloor(int index) {
-		if ((index >= getOfficesOnFloorAmount())||(index < 0)) {
+	public void removeSpace(int index) {
+		if ((index >= getSpacesAmount())||(index < 0)) {
 			throw new SpaceIndexOutOfBoundsException();
 		}
 		removeNode(index);
@@ -180,11 +183,11 @@ public class OfficeFloor {
 	/**
 	* Создайте метод getBestSpace() получения самого большого по площади офиса этажа.
 	*/
-	public Office getBestSpace() {
+	public Space getBestSpace() {
 		double bestSpace = 0;
 		Office officeBestSpace = null;
 		Node current = head;
-		for (int i = 0; i <= getRoomsOnFloorAmount(); i++) {
+		for (int i = 0; i <= getRoomsAmount(); i++) {
 			current = current.next;
 			if(current.anOffice.getArea() > bestSpace) {
 				bestSpace = current.anOffice.getArea();

@@ -1,8 +1,8 @@
-package buildings;
+package buildings.dwelling;
 
+import buildings.Space;
 import exceptions.InvalidRoomsCountException;
 import exceptions.InvalidSpaceAreaException;
-import interfaces.Space;
 
 /**
  * Создайте класс Flat квартиры жилого дома.

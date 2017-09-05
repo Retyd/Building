@@ -1,18 +1,18 @@
-﻿package interfaces;
+﻿package buildings;
 
 /**
- * Создайте интерфейс Space помещени¤ здани¤.
+ * Создайте интерфейс Space помещения здания.
  * Интерфейс должен соответствовать общей функциональности Flat и Office и содержать следующие методы:
  * получения  количества комнат,
  * изменения количества комнат,
  * получения площади,
  * изменения площади.
  * Классы, соответственно, должны реализовывать интерфейс (при необходимости измените классы).
- * Рекомендуетс¤ использовать возможности рефакторинга среды разработки.
+ * Рекомендуется использовать возможности рефакторинга среды разработки.
  */
 public interface Space {
-	int getRoomsAmount();
-	double getArea();
-	void setRoomsAmount(int roomsAmount);
-	void setArea(double area);
+	public int getRoomsAmount();
+	public double getArea();
+	public void setRoomsAmount(int roomsAmount);
+	public void setArea(double area);
 }
