@@ -3,6 +3,6 @@
  * Опишите классы ошибок:
  * несоответствия обменивающихся помещений InexchangeableSpacesException (объявляемое).
  */
-public class InexchangeableSpacesException {
+public class InexchangeableSpacesException extends Throwable {
 
 }
