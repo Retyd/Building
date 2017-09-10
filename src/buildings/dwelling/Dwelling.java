@@ -15,8 +15,7 @@ import exceptions.SpaceIndexOutOfBoundsException;
  * Нумерация квартир в доме сквозная и начинается с нуля. 
  */
 public class Dwelling implements Building, Serializable {
-    private DwellingFloor[] floors;
-	public int length;
+    protected DwellingFloor[] floors;
 	
 	/**
 	 * Конструктор может принимать количество этажей и массив количества квартир по этажам.
