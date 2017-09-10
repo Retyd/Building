@@ -1,4 +1,5 @@
 package buildings.dwelling;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -13,7 +14,7 @@ import exceptions.SpaceIndexOutOfBoundsException;
  * Номер квартиры явно не хранится.
  * Нумерация квартир в доме сквозная и начинается с нуля. 
  */
-public class Dwelling implements Building {
+public class Dwelling implements Building, Serializable {
     private DwellingFloor[] floors;
 	public int length;
 	

@@ -1,5 +1,7 @@
 package buildings.dwelling;
 
+import java.io.Serializable;
+
 import buildings.Space;
 import exceptions.InvalidRoomsCountException;
 import exceptions.InvalidSpaceAreaException;
@@ -10,7 +12,7 @@ import exceptions.InvalidSpaceAreaException;
  * Разные квартиры могут иметь разную площадь.
  * Разные квартиры могут иметь разное количество комнат.
  */
-public class Flat implements Space {
+public class Flat implements Space, Serializable {
         public static final float DEFAULT_AREA = 50;
         public static final int DEFAULT_AMOUNTROOMS = 2;
 

@@ -1,4 +1,6 @@
 package buildings.office;
+import java.io.Serializable;
+
 import buildings.Floor;
 import buildings.Space;
 import exceptions.SpaceIndexOutOfBoundsException;
@@ -8,7 +10,7 @@ import exceptions.SpaceIndexOutOfBoundsException;
  * Работа класса должна быть основана на односвязном циклическом списке офисов с выделенной головой.
  * Номер офиса явно не хранится.
  */
-public class OfficeFloor implements Floor {
+public class OfficeFloor implements Floor, Serializable {
 	private static class Node{
 		Node next;
 		Office anOffice;

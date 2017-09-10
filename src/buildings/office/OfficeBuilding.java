@@ -1,4 +1,5 @@
 package buildings.office;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -14,7 +15,7 @@ import exceptions.SpaceIndexOutOfBoundsException;
  * Номер офиса явно не хранится.
  * Нумерация офисов в здании сквозная и начинается с нуля.
  */
-public class OfficeBuilding implements Building {	
+public class OfficeBuilding implements Building, Serializable {	
 	private static class Node{
 		Node next;
 		Node previous;

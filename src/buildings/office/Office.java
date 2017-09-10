@@ -1,4 +1,6 @@
 package buildings.office;
+import java.io.Serializable;
+
 import buildings.Space;
 import exceptions.InvalidRoomsCountException;
 import exceptions.InvalidSpaceAreaException;
@@ -9,7 +11,7 @@ import exceptions.InvalidSpaceAreaException;
  * Разные офисы могут иметь разные площади.
  * Разные офисы могут иметь разное количество комнат.
  */
-public class Office implements Space {
+public class Office implements Space, Serializable {
     public static final int DEFAULT_ROOMSAMOUNT = 1;
     public static final double DEFAULT_AREA = 250;
 

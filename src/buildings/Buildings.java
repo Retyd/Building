@@ -1,6 +1,18 @@
 package buildings;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.StreamTokenizer;
+import java.io.Writer;
+
+import buildings.dwelling.Dwelling;
+import buildings.dwelling.DwellingFloor;
+import buildings.dwelling.Flat;
 
 public class Buildings {
 	 /**       
@@ -13,23 +25,79 @@ public class Buildings {
        * записи данных о здании в байтовый поток 
        * public static void outputBuilding (Building building, OutputStream out);
 	   */
-	public static void outputBuilding (Building building, OutputStream out) {
-		
-	}
-	  
-      /** чтения данных о здании из байтового потока 
+	public static void outputBuilding (Building building, OutputStream out) throws IOException {
+		DataOutputStream dos = new DataOutputStream(out);
+		Floor floor = null;
+		Space space = null;		
+		dos.writeInt(building.getFloorsAmount());		
+		for(int i = 0, floorsAmount = building.getFloorsAmount(); i < floorsAmount; i++) {
+			floor = building.getFloor(i);
+			dos.writeInt(floor.getSpacesAmount());
+			for (int j = 0, spacesAmount = floor.getSpacesAmount(); j < spacesAmount; j++) {
+				space = floor.getSpace(j);
+				dos.writeInt(space.getRoomsAmount());
+				dos.writeDouble(space.getArea());
+			}
+		}
+        dos.close();
+    }
+	
+      /**чтения данных о здании из байтового потока 
        * public static Building inputBuilding (InputStream in);
 	   */
+	public static Building inputBuilding (InputStream in) throws IOException {		
+		DataInputStream dis = new DataInputStream(in);
+		DwellingFloor [] floors = new DwellingFloor[dis.readInt()];
+		for(int i = 0, sizeFloors = floors.length; i < sizeFloors; i++) {
+			Flat[] flats = new Flat[dis.readInt()];
+			for (int j = 0, sizeFlats = flats.length; j < sizeFlats; j++) {				
+				flats[j] = new Flat(dis.readDouble(), dis.readInt());
+			}
+			floors[i] = new DwellingFloor(flats);
+		}
+		dis.close();
+		Dwelling building = new Dwelling(floors);
+		return (Building)building;
+	}
 	  
       /** записи здания в символьный поток 
        * public static void writeBuilding (Building building, Writer out);
 	   */
+		public static void writeBuilding (Building building, Writer out) {
+			PrintWriter pwo = new PrintWriter(out);
+			Floor floor = null;
+			Space space = null;		
+			pwo.print(building.getFloorsAmount() + " ");		
+			for(int i = 0, floorsAmount = building.getFloorsAmount(); i < floorsAmount; i++) {
+				floor = building.getFloor(i);
+				pwo.print(floor.getSpacesAmount() + " ");
+				for (int j = 0, spacesAmount = floor.getSpacesAmount(); j < spacesAmount; j++) {
+					space = floor.getSpace(j);
+					pwo.print(space.getRoomsAmount() + " ");
+					pwo.print(space.getArea() + " ");
+				}
+			}
+	        pwo.close();
+		}
 	  
       /** чтения здания из символьного потока 
        * public static Building readBuilding (Reader in).
 	   */
-	  
-      /**
-       * Проверьте возможности всех реализованных методов, в качестве реальных потоков используя файловые потоки, а также потоки System.in и System.out.
-       */
+		public static Building readBuilding (Reader in) throws IOException {
+			StreamTokenizer st = new StreamTokenizer(in);
+			DwellingFloor [] floors = new DwellingFloor[(int)st.nextToken()];
+			for(int i = 0, sizeFloors = floors.length; i < sizeFloors; i++) {
+				Flat[] flats = new Flat[(int)st.nextToken()];
+				for (int j = 0, sizeFlats = flats.length; j < sizeFlats; j++) {				
+					flats[j] = new Flat((double)st.nextToken(), (int)st.nextToken());
+				}
+				floors[i] = new DwellingFloor(flats);
+			}
+			Dwelling building = new Dwelling(floors);
+			return (Building)building;
+		}	  
 }
+/**
+ * Модифицировать классы помещений, этажей и зданий таким образом, чтобы они были сериализуемыми.
+ * Продемонстрировать возможности сериализации в методе main(), записав в файл объект, затем считав и сравнив его с исходным (по сохраненным значениям).
+ */
