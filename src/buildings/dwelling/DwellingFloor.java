@@ -1,6 +1,7 @@
 package buildings.dwelling;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import buildings.Floor;
 import buildings.Space;
@@ -12,7 +13,7 @@ import exceptions.SpaceIndexOutOfBoundsException;
  * Нумерация квартир на этаже сквозная и начинается с нуля.
  */
 public class DwellingFloor implements Floor, Serializable {
-    private Flat[] flats;
+    protected Flat[] flats;
     
     /**
      * Конструктор может принимать количество квартир на этаже.
@@ -137,4 +138,47 @@ public class DwellingFloor implements Floor, Serializable {
 
         return flatBestSpace;
     }
+	
+    /**
+     * Добавьте в классы этажей DwellingFloor, OfficeFloor реализации метода String toString(). Методы выводят тип этажа, текущее количество помещений этажа и соответствующую информацию по каждому помещению, используя метод toString() помещения. Например,
+     * DwellingFloor (3, Flat (3, 55.0), Flat (2, 48.0), Flat (1, 37.0))
+     */
+    @Override
+	public String toString() {
+    	StringBuilder s = new StringBuilder();
+    	s.append("DwellingFloor (").append(getSpacesAmount()).append(", ");
+    	for(int i = 0; i < flats.length; i++) {
+    		if (i > 0 ) s.append(", ");    		
+    		s.append(flats[i].toString());
+    		}
+    	s.append(")");
+    	return s.toString();
+	}
+
+    /**
+	 * Добавьте в классы этажей реализации методов boolean equals(Object object). Метод должен возвращать true только в том случае, если объект, на который передана ссылка, является этажом соответствующего типа, количество помещений совпадает и сами помещения эквивалентны помещениям текущего объекта. Для экземпляров класса HotelFloor также должно проверяться совпадение количества звёзд.
+	 */
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(flats);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof DwellingFloor))
+			return false;
+		DwellingFloor other = (DwellingFloor) obj;
+		if (!Arrays.equals(flats, other.flats))
+			return false;
+		return true;
+	}
+    
+    
 }

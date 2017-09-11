@@ -20,7 +20,7 @@ public class Dwelling implements Building, Serializable {
 	/**
 	 * Конструктор может принимать количество этажей и массив количества квартир по этажам.
 	 */
-    public Dwelling (int floorsAmount, int[] flatsAmount) {
+    public Dwelling(int floorsAmount, int[] flatsAmount) {
         this.floors = new DwellingFloor[floorsAmount];
 
         for (int i = 0; i < floorsAmount; i++) {
@@ -222,5 +222,50 @@ public class Dwelling implements Building, Serializable {
 			}    		
     	});    	
     	return nonSortedFlats;
-    }    
+    }
+
+	 
+    
+    /**
+     * Добавьте в классы зданий Dwelling, OfficeBuilding реализации метода String toString(). Методы выводят текущее количество этажей и соответствующую информацию о каждом помещении каждого этажа, используя toString() уровня этажа и помещения. Например,
+     * Dwelling (2, DwellingFloor (3, Flat (...), ...), DwellingFloor (3, Flat (...), ...)
+     */
+    @Override
+	public String toString() {
+    	StringBuilder s = new StringBuilder();
+    	s.append("Dwelling (").append(getFloorsAmount()).append(", ");
+    	for (int i = 0; i < getFloorsAmount(); i++) {
+    		if (i > 0 ) s.append(", ");
+    		s.append(floors[i].toString());
+    	}
+    	s.append(")");    	
+    	return s.toString();
+    }
+
+    /**
+	 * Добавьте в классы зданий реализации методов boolean equals(Object object). Метод должен возвращать true только в том случае, если объект, на который передана ссылка, является зданием соответствующего типа, количество этажей совпадает и сами этажи эквивалентны помещениям текущего объекта. 
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(floors);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Dwelling))
+			return false;
+		Dwelling other = (Dwelling) obj;
+		if (!Arrays.equals(floors, other.floors))
+			return false;
+		return true;
+	}
+    
+    
 }

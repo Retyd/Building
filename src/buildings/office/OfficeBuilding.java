@@ -33,14 +33,15 @@ public class OfficeBuilding implements Building, Serializable {
 	/**
 	* Конструктор может принимать количество этажей и массив количества офисов по этажам.
 	*/
-	public OfficeBuilding(int index, int[] officesAmountOnFloor) {
+	public OfficeBuilding(int size, int[] officesAmountOnFloor) {
 		this();
 		Node current = head;
-		for (int i = 0; i < index; i++) {
+		for (int i = 0; i < size; i++) {
 			Node x = new Node();
-			current.next = x;
-			x.previous = current;
 			x.anOfficeFloor = new OfficeFloor(officesAmountOnFloor[i]);
+			current.next = x;
+			current.next.previous = current;
+			current = current.next;
 		}
 		current.next = head.next;
 		head.next.previous = current;
@@ -305,4 +306,51 @@ public class OfficeBuilding implements Building, Serializable {
     	});    	
 		return nonSortedOffices;
 	}
+	
+	/**
+     * Добавьте в классы зданий Dwelling, OfficeBuilding реализации метода String toString(). Методы выводят текущее количество этажей и соответствующую информацию о каждом помещении каждого этажа, используя toString() уровня этажа и помещения. Например,
+     * Dwelling (2, DwellingFloor (3, Flat (...), ...), DwellingFloor (3, Flat (...), ...)
+     */
+    @Override
+	public String toString() {
+    	StringBuilder s = new StringBuilder();
+    	OfficeFloor[] floors = (OfficeFloor[]) getFloorsArray();
+    	s.append("OfficeBuilding (").append(getFloorsAmount()).append(", ");
+    	for (int i = 0; i < floors.length; i++) {
+    		if (i > 0 ) s.append(", ");
+    		s.append(floors[i].toString());
+    	}
+    	s.append(")");    	
+    	return s.toString();
+    }
+
+	/**
+	 * Добавьте в классы зданий реализации методов boolean equals(Object object). Метод должен возвращать true только в том случае, если объект, на который передана ссылка, является зданием соответствующего типа, количество этажей совпадает и сами этажи эквивалентны помещениям текущего объекта. 
+	 */
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((head == null) ? 0 : head.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof OfficeBuilding))
+			return false;
+		OfficeBuilding other = (OfficeBuilding) obj;
+		if (head == null) {
+			if (other.head != null)
+				return false;
+		} else if (!head.equals(other.head))
+			return false;
+		return true;
+	}
+    
+    
 }

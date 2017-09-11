@@ -198,4 +198,51 @@ public class OfficeFloor implements Floor, Serializable {
 		}
 		return officeBestSpace;
 	}
+	
+    /**
+     * Добавьте в классы этажей DwellingFloor, OfficeFloor реализации метода String toString(). Методы выводят тип этажа, текущее количество помещений этажа и соответствующую информацию по каждому помещению, используя метод toString() помещения. Например,
+     * DwellingFloor (3, Flat (3, 55.0), Flat (2, 48.0), Flat (1, 37.0))
+     */
+    @Override
+	public String toString() {
+    	StringBuilder s = new StringBuilder();
+    	Space[] offices = getSpaceArray();
+    	s.append("OfficeFloor (").append(getRoomsAmount()).append(", ");
+    	for(int i = 0; i < offices.length; i++) {
+    		if (i > 0 ) s.append(", ");
+    		s.append(offices[i].toString());
+    	}
+    	s.append(")");    	
+    	return s.toString();
+	}
+
+    /**
+	 * Добавьте в классы этажей реализации методов boolean equals(Object object). Метод должен возвращать true только в том случае, если объект, на который передана ссылка, является этажом соответствующего типа, количество помещений совпадает и сами помещения эквивалентны помещениям текущего объекта. Для экземпляров класса HotelFloor также должно проверяться совпадение количества звёзд.
+	 */
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((head == null) ? 0 : head.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof OfficeFloor))
+			return false;
+		OfficeFloor other = (OfficeFloor) obj;
+		if (head == null) {
+			if (other.head != null)
+				return false;
+		} else if (!head.equals(other.head))
+			return false;
+		return true;
+	}  
+    
+    
 }

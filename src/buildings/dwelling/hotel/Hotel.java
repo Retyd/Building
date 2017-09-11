@@ -8,10 +8,9 @@ import buildings.dwelling.DwellingFloor;
 /**
  * Создайте класс отеля Hotel, расширяющий класс Dwelling.
  */
-public class Hotel extends Dwelling{
-	public Hotel(DwellingFloor[] floors) {
-		super(floors);
-		// TODO Auto-generated constructor stub
+public class Hotel extends Dwelling {	
+	public Hotel(HotelFloor[] hotelFloors) {
+		super(hotelFloors);
 	}
 
 	/**
@@ -44,7 +43,7 @@ public class Hotel extends Dwelling{
 		for(Floor floor : floors) {
 			if (floor instanceof HotelFloor) {
 					for(Space flat: floor.getSpaceArray()) {
-						double score = coeff[((Hotel) floor).getStars()]*flat.getArea();
+						double score = coeff[((Hotel) floor).getStars()+1]*flat.getArea();
 						if (result < score) {
 							result = score;
 							bestSpace = flat;
@@ -54,4 +53,22 @@ public class Hotel extends Dwelling{
 		}
 		return bestSpace;
 	}
+	
+	/**
+	 * Переопределите в классе Hotel метод String toString(). Метод выводит значение показателя звездности здания, текущее количество этажей и соответствующую информацию о каждом помещении каждого этажа, используя toString() уровня этажа и помещения. Например,
+	 * Hotel (5, 4, HotelFloor(3, 4, Flat(...),...), HotelFloor(4, 4, Flat(...),...), HotelFloor(4, 4, Flat(...),...), HotelFloor(5, 4, Flat(...),...))
+	 */
+	@Override
+	public String toString() {
+    	StringBuilder s = new StringBuilder();
+    	s.append("Hotel (").append(getStars()).append(", ").append(getFloorsAmount()).append(", ");
+    	for (int i = 0; i < getFloorsAmount(); i++) {
+    		if(floors[i] instanceof HotelFloor) {
+    			if (i > 0 ) s.append(", ");
+        		s.append(floors[i].toString());
+    		}
+    	}
+    	s.append(")");    	
+    	return s.toString();
+    }
 }
