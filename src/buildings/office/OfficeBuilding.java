@@ -308,8 +308,9 @@ public class OfficeBuilding implements Building, Serializable {
 	}
 	
 	/**
-     * Добавьте в классы зданий Dwelling, OfficeBuilding реализации метода String toString(). Методы выводят текущее количество этажей и соответствующую информацию о каждом помещении каждого этажа, используя toString() уровня этажа и помещения. Например,
-     * Dwelling (2, DwellingFloor (3, Flat (...), ...), DwellingFloor (3, Flat (...), ...)
+     * Добавьте в классы зданий Dwelling, OfficeBuilding реализации метода String toString(). 
+	 * Методы выводят текущее количество этажей и соответствующую информацию о каждом помещении каждого этажа, используя toString() уровня этажа и помещения. 
+	 * Например, Dwelling (2, DwellingFloor (3, Flat (...), ...), DwellingFloor (3, Flat (...), ...)
      */
     @Override
 	public String toString() {

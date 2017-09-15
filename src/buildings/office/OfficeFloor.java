@@ -200,8 +200,9 @@ public class OfficeFloor implements Floor, Serializable {
 	}
 	
     /**
-     * Добавьте в классы этажей DwellingFloor, OfficeFloor реализации метода String toString(). Методы выводят тип этажа, текущее количество помещений этажа и соответствующую информацию по каждому помещению, используя метод toString() помещения. Например,
-     * DwellingFloor (3, Flat (3, 55.0), Flat (2, 48.0), Flat (1, 37.0))
+     * Добавьте в классы этажей DwellingFloor, OfficeFloor реализации метода String toString(). 
+	 * Методы выводят тип этажа, текущее количество помещений этажа и соответствующую информацию по каждому помещению, используя метод toString() помещения. 
+	 * Например, DwellingFloor (3, Flat (3, 55.0), Flat (2, 48.0), Flat (1, 37.0))
      */
     @Override
 	public String toString() {
