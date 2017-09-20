@@ -13,6 +13,22 @@
 
 package buildings.threads;
 
-public class Cleaner extends Thread {
+import buildings.Floor;
+import buildings.Space;
 
+public class Cleaner extends Thread {
+	protected Floor floor;
+	
+	public Cleaner(Floor floor) {
+		this.floor = floor;
+	}
+	
+	@Override
+	public void run() {
+		int spacesAmount = floor.getSpacesAmount();
+		Space[] spaces = floor.getSpaceArray();
+		for(int i = 0; i < spacesAmount; i++) {			
+			System.out.println("Cleaning room number " + i + " with total area " + spaces[i].getArea() + " square meters");
+		}
+	}
 }
