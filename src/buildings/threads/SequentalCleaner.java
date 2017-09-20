@@ -17,25 +17,25 @@ import buildings.Space;
 
 public class SequentalCleaner implements Runnable {
 	protected Floor floor;
-	public Test data;
+	MySemaphore sem;
 	
-	public SequentalCleaner(Floor floor, Test data) {
+	public SequentalCleaner(Floor floor, MySemaphore data) {
 		this.floor = floor;
-		this.data = data;
+		this.sem = data;
 	}
 	
 	@Override
 	public void run() {
 		 int spacesAmount = floor.getSpacesAmount();
 		 Space[] spaces = floor.getSpaceArray();
-		 synchronized(floor) {
+		 synchronized(sem) {
 			 for(int i = 0; i < spacesAmount; i++) {
-				if(data.value == 1) {
+				if(sem.isRepaired) {
 					try {
-						floor.notify();
+						sem.notify();
 						System.out.println("Cleaning room number " + i + " with total area " + spaces[i].getArea() + " square meters");
-						data.value = 0;
-						floor.wait();
+						sem.isRepaired = false;
+						sem.wait();
 					} catch (InterruptedException ex) {
 						System.out.println("Что-то не так в потоке SequentalCleaner");
 					}

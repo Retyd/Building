@@ -2,6 +2,6 @@
 
 package buildings.threads;
 
-public class Test {
-	public int value = 0;
+public class MySemaphore {
+	public boolean isRepaired = false;
 }

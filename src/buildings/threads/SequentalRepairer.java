@@ -17,25 +17,25 @@ import buildings.Space;
 
 public class SequentalRepairer implements Runnable {
 	protected Floor floor;
-	public Test data;
+	MySemaphore sem;
 	
-	public SequentalRepairer(Floor floor, Test data) {
+	public SequentalRepairer(Floor floor, MySemaphore data) {
 		this.floor = floor;
-		this.data = data;
+		this.sem = data;
 	}
 	
 	@Override
 	public void run() {
 		 int spacesAmount = floor.getSpacesAmount();
 		 Space[] spaces = floor.getSpaceArray();
-		 synchronized(floor) {
+		 synchronized(sem) {
 			 for(int i = 0; i < spacesAmount; i++) {	
-				if(data.value == 0) {
+				if(sem.isRepaired == false) {
 					try {
-						floor.notify();
+						sem.notify();
 						System.out.println("Repairing space number " + i + " with total area " + spaces[i].getArea() + " square meters");
-						data.value = 1;
-						floor.wait();
+						sem.isRepaired = true;
+						sem.wait();
 					} catch (InterruptedException ex) {
 						System.out.println("Что-то не так в потоке SequentalRepairer");
 					}

@@ -7,7 +7,7 @@ import buildings.threads.Cleaner;
 import buildings.threads.Repairer;
 import buildings.threads.SequentalCleaner;
 import buildings.threads.SequentalRepairer;
-import buildings.threads.Test;
+import buildings.threads.MySemaphore;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {		
@@ -52,9 +52,9 @@ public class Main {
     	repairer.start();*/    	
     	
     	//тест синхронизованных потоков
-    	Test data = new Test();
-    	Thread repairer = new Thread(new SequentalRepairer(testDwellingFloor, data));
-    	Thread cleaner = new Thread(new SequentalCleaner(testDwellingFloor, data));    	
+    	MySemaphore sem = new MySemaphore();
+    	Thread repairer = new Thread(new SequentalRepairer(testDwellingFloor, sem));
+    	Thread cleaner = new Thread(new SequentalCleaner(testDwellingFloor, sem));    	
     	repairer.start();
     	cleaner.start();
     }
