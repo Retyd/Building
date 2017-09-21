@@ -1,4 +1,4 @@
-//Это класс-семафор для классов SequentalRepairer и SequentalCleaner
+//Р­С‚Рѕ РєР»Р°СЃСЃ-СЃРµРјР°С„РѕСЂ РґР»СЏ РєР»Р°СЃСЃРѕРІ SequentalRepairer Рё SequentalCleaner
 
 package buildings.threads;
 
