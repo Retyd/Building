@@ -14,3 +14,4 @@
 Класс [Buildings](src/buildings/Buildings.java) содержит методы, которые записывают данные о здании в байтовый или символьный поток, и методы, которые читают их оттуда и на основе полученных данных создают объект здания.  
   
 В [этом](src/buildings/threads) пакете лежат классы потоков. Два из них ([SequentalRepairer](src/buildings/threads/SequentalRepairer.java) и [SequentalCleaner](src/buildings/threads/SequentalCleaner.java)) синхронизированы (с помощью очень-очень простого вспомогательного [класса-семафора](src/buildings/threads/MySemaphore.java)).  
+[SynchronizedFloor](src/buildings/SynchronizedFloor.java) - класс-декоратор, реализующий с обеспечением синхронизации методы интерфейса Floor, а также перегружающий ряд методов класса Object.   
