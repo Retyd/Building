@@ -3,8 +3,8 @@ package buildings.dwelling;
 import java.io.Serializable;
 import java.util.Arrays;
 
-import buildings.Floor;
-import buildings.Space;
+import buildings.interfaces.Floor;
+import buildings.interfaces.Space;
 import exceptions.SpaceIndexOutOfBoundsException;
 
 /**

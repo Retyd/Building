@@ -13,8 +13,8 @@
 
 package buildings.threads;
 
-import buildings.Floor;
-import buildings.Space;
+import buildings.interfaces.Floor;
+import buildings.interfaces.Space;
 
 public class Repairer extends Thread {
 	protected Floor floor;

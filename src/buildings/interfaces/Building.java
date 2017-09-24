@@ -1,4 +1,4 @@
-package buildings;
+package buildings.interfaces;
 
 /**
  * Создайте интерфейс Building здания, работающий со ссылками типа Floor и Space.

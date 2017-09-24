@@ -1,9 +1,9 @@
 package buildings.dwelling.hotel;
 
-import buildings.Floor;
-import buildings.Space;
 import buildings.dwelling.Dwelling;
 import buildings.dwelling.DwellingFloor;
+import buildings.interfaces.Floor;
+import buildings.interfaces.Space;
 
 /**
  * Создайте класс отеля Hotel, расширяющий класс Dwelling.
@@ -11,6 +11,10 @@ import buildings.dwelling.DwellingFloor;
 public class Hotel extends Dwelling {	
 	public Hotel(HotelFloor[] hotelFloors) {
 		super(hotelFloors);
+	}
+
+	public Hotel(int floorsCount, int[] spacesCounts) {
+		super(floorsCount, spacesCounts);
 	}
 
 	/**

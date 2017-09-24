@@ -12,8 +12,8 @@
  */
 package buildings.threads;
 
-import buildings.Floor;
-import buildings.Space;
+import buildings.interfaces.Floor;
+import buildings.interfaces.Space;
 
 public class SequentalCleaner implements Runnable {
 	protected Floor floor;

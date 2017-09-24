@@ -2,7 +2,7 @@ package buildings.dwelling;
 
 import java.io.Serializable;
 
-import buildings.Space;
+import buildings.interfaces.Space;
 import exceptions.InvalidRoomsCountException;
 import exceptions.InvalidSpaceAreaException;
 
@@ -22,21 +22,21 @@ public class Flat implements Space, Serializable {
         /**
          * Конструктор по умолчанию создает квартиру из 2 комнат площадью 50 кв.м. (эти числа должны быть константами в классе)
          */
-        public Flat () {
-            this(DEFAULT_AREA, DEFAULT_AMOUNTROOMS);
+        public Flat() {
+            this(DEFAULT_AMOUNTROOMS, DEFAULT_AREA);
         }
 
         /**
          * Конструктор может принимать площадь квартиры (создается квартира с 2 комнатами).
          */
-        public Flat (double area) {
-           this(area, DEFAULT_AMOUNTROOMS);
+        public Flat(double area) {
+           this(DEFAULT_AMOUNTROOMS, area);
         }
         
         /**
          * Конструктор может принимать площадь квартиры и количество комнат.
          */
-        public Flat (double area, int roomsAmount) {
+        public Flat(int roomsAmount, double area) {
         	if (area <= 0) {
         		throw new InvalidSpaceAreaException();
         	}
@@ -64,7 +64,7 @@ public class Flat implements Space, Serializable {
         /**
          * Создайте метод изменения площади квартиры.
          */
-        public void setArea (double area) {
+        public void setArea(double area) {
         	if (area <= 0) {
         		throw new InvalidSpaceAreaException();
         	}

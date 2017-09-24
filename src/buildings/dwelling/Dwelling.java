@@ -3,9 +3,9 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import buildings.Building;
-import buildings.Floor;
-import buildings.Space;
+import buildings.interfaces.Building;
+import buildings.interfaces.Floor;
+import buildings.interfaces.Space;
 import exceptions.FloorIndexOutOfBoundsException;
 import exceptions.SpaceIndexOutOfBoundsException;
 

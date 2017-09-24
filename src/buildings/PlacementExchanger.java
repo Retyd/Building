@@ -1,5 +1,8 @@
 package buildings;
 
+import buildings.interfaces.Building;
+import buildings.interfaces.Floor;
+import buildings.interfaces.Space;
 import exceptions.FloorIndexOutOfBoundsException;
 import exceptions.InexchangeableFloorsException;
 import exceptions.InexchangeableSpacesException;

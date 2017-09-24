@@ -5,11 +5,14 @@
  * безопасную с точки зрения многопоточности.
  * Для этого потребуется в пакете buildings описать новый класс декоратора 
  * SynchronizedFloor, реализующий с обеспечением синхронизации 
- * методы интерфейса Floor, а также перегружающий ряд методов класса Object. 
+ * методы интерфейса Floor, а также переопределяющий ряд методов класса Object. 
  * Создание специальных итераторов и их синхронизация не требуются.
  */
 
 package buildings;
+
+import buildings.interfaces.Floor;
+import buildings.interfaces.Space;
 
 public class SynchronizedFloor implements Floor {
 	protected Floor floor;

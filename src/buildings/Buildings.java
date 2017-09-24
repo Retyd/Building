@@ -13,8 +13,31 @@ import java.io.Writer;
 import buildings.dwelling.Dwelling;
 import buildings.dwelling.DwellingFloor;
 import buildings.dwelling.Flat;
+import buildings.factory.DwellingFactory;
+import buildings.interfaces.Building;
+import buildings.interfaces.BuildingFactory;
+import buildings.interfaces.Floor;
+import buildings.interfaces.Space;
 
 public class Buildings {
+	/**
+	 * В классе Buildings создайте статическое поле типа BuildingFactory 
+	 * и метод setBuildingFactory, позволяющие, соответственно, хранить 
+	 * ссылку и устанавливать ссылку на текущую конкретную фабрику. 
+	 * По умолчанию поле должно ссылаться на объект, порождающий экземпляры 
+	 * класса Dwelling.
+	 * В классе Buildings реализуйте статические методы, которые 
+	 * с помощью текущей фабрики создают новые экземпляры 
+	 * соответствующих объектов. В остальных методах класса Buildings 
+	 * замените прямое создание экземпляров объектов на вызов методов 
+	 * фабрики.
+	 */
+	private static BuildingFactory buildingFactory = new DwellingFactory();
+	
+	public void setBuildingFactory(BuildingFactory buildingFactory) {
+		this.buildingFactory = buildingFactory;
+	}
+	
 	 /**       
        * Записанные данные о здании представляет собой последовательность чисел, первым из которых является количество этажей, 
 	   * далее следует количество помещений текущего этажа и соответствующие значения количества комнат и площадей помещений текущего этажа.
@@ -52,7 +75,7 @@ public class Buildings {
 		for(int i = 0, sizeFloors = floors.length; i < sizeFloors; i++) {
 			Flat[] flats = new Flat[dis.readInt()];
 			for (int j = 0, sizeFlats = flats.length; j < sizeFlats; j++) {				
-				flats[j] = new Flat(dis.readDouble(), dis.readInt());
+				flats[j] = new Flat(dis.readInt(), dis.readDouble());
 			}
 			floors[i] = new DwellingFloor(flats);
 		}
@@ -90,7 +113,7 @@ public class Buildings {
 			for(int i = 0, sizeFloors = floors.length; i < sizeFloors; i++) {
 				Flat[] flats = new Flat[(int)st.nextToken()];
 				for (int j = 0, sizeFlats = flats.length; j < sizeFlats; j++) {				
-					flats[j] = new Flat((double)st.nextToken(), (int)st.nextToken());
+					flats[j] = new Flat((int)st.nextToken(), (double)st.nextToken());
 				}
 				floors[i] = new DwellingFloor(flats);
 			}
