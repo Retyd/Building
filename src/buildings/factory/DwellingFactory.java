@@ -1,7 +1,7 @@
-/**
- * Создайте классы конкретных фабрик DwellingFactory, OfficeFactory, 
- * HotelFactory, реализующие интерфейс BuildingFactory и 
- * создающие объекты соответствующих типов.
+п»ї/**
+ * CРѕР·РґР°Р№С‚Рµ РєР»Р°СЃСЃС‹ РєРѕРЅРєСЂРµС‚РЅС‹С… С„Р°Р±СЂРёРє DwellingFactory, OfficeFactory, 
+ * HotelFactory, СЂРµР°Р»РёР·СѓСЋС‰РёРµ РёРЅС‚РµСЂС„РµР№СЃ BuildingFactory Рё 
+ * СЃРѕР·РґР°СЋС‰РёРµ РѕР±СЉРµРєС‚С‹ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёС… С‚РёРїРѕРІ.
  */
 package buildings.factory;
 
