@@ -35,7 +35,31 @@ public class Buildings {
 	private static BuildingFactory buildingFactory = new DwellingFactory();
 	
 	public void setBuildingFactory(BuildingFactory buildingFactory) {
-		this.buildingFactory = buildingFactory;
+		Buildings.buildingFactory = buildingFactory;
+	}
+	
+	public Space createSpace(double area) {
+		return buildingFactory.createSpace(area);
+	}
+	
+	public Space createSpace(int roomsCount, double area) {
+		return buildingFactory.createSpace(roomsCount, area);
+	}
+	
+	public Floor createFloor(int spacesCount) {
+		return buildingFactory.createFloor(spacesCount);
+	}
+	
+	public Floor createFloor(Space[] spaces) {
+		return buildingFactory.createFloor(spaces);
+	}
+	
+	public Building createBuilding(int floorsCount, int[] spacesCounts) {
+		return buildingFactory.createBuilding(floorsCount, spacesCounts);
+	}
+	
+	public Building createBuilding(Floor[] floors) {
+		return buildingFactory.createBuilding(floors);
 	}
 	
 	 /**       
@@ -70,18 +94,17 @@ public class Buildings {
        * public static Building inputBuilding (InputStream in);
 	   */
 	public static Building inputBuilding (InputStream in) throws IOException {		
-		DataInputStream dis = new DataInputStream(in);
-		DwellingFloor [] floors = new DwellingFloor[dis.readInt()];
+		DataInputStream dis = new DataInputStream(in);		
+		Floor[] floors = new Floor[dis.readInt()];
 		for(int i = 0, sizeFloors = floors.length; i < sizeFloors; i++) {
-			Flat[] flats = new Flat[dis.readInt()];
+			Space[] flats = new Space[dis.readInt()];
 			for (int j = 0, sizeFlats = flats.length; j < sizeFlats; j++) {				
-				flats[j] = new Flat(dis.readInt(), dis.readDouble());
+				flats[j] = buildingFactory.createSpace(dis.readInt(), dis.readDouble());
 			}
-			floors[i] = new DwellingFloor(flats);
+			floors[i] = buildingFactory.createFloor(flats);
 		}
 		dis.close();
-		Dwelling building = new Dwelling(floors);
-		return (Building)building;
+		return buildingFactory.createBuilding(floors);
 	}
 	  
       /** записи здания в символьный поток 
@@ -109,16 +132,15 @@ public class Buildings {
 	   */
 		public static Building readBuilding (Reader in) throws IOException {
 			StreamTokenizer st = new StreamTokenizer(in);
-			DwellingFloor [] floors = new DwellingFloor[(int)st.nextToken()];
+			Floor [] floors = new Floor[(int)st.nextToken()];
 			for(int i = 0, sizeFloors = floors.length; i < sizeFloors; i++) {
-				Flat[] flats = new Flat[(int)st.nextToken()];
+				Space[] flats = new Space[(int)st.nextToken()];
 				for (int j = 0, sizeFlats = flats.length; j < sizeFlats; j++) {				
-					flats[j] = new Flat((int)st.nextToken(), (double)st.nextToken());
+					flats[j] = buildingFactory.createSpace((int)st.nextToken(), (double)st.nextToken());
 				}
-				floors[i] = new DwellingFloor(flats);
+				floors[i] = buildingFactory.createFloor(flats);
 			}
-			Dwelling building = new Dwelling(floors);
-			return (Building)building;
+			return buildingFactory.createBuilding(floors);
 		}	  
 }
 /**
