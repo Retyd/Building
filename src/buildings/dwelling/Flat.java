@@ -12,7 +12,7 @@ import exceptions.InvalidSpaceAreaException;
  * Разные квартиры могут иметь разную площадь.
  * Разные квартиры могут иметь разное количество комнат.
  */
-public class Flat implements Space, Serializable {
+public class Flat implements Space, Serializable, Cloneable {
         public static final float DEFAULT_AREA = 50;
         public static final int DEFAULT_AMOUNTROOMS = 2;
 
@@ -121,5 +121,16 @@ public class Flat implements Space, Serializable {
 				return false;
 			return true;
 		}
-        
+		
+		/**
+		 * Добавьте в интерфейс и классы помещений метод Object clone().
+		 * Клонирование должно быть глубоким.
+		 */
+		public Object clone() {
+			Object result = null;
+			try {
+				result = super.clone();
+			} catch (CloneNotSupportedException e) {}
+			return result;
+		}
 }

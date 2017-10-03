@@ -11,7 +11,7 @@ import exceptions.InvalidSpaceAreaException;
  * Разные офисы могут иметь разные площади.
  * Разные офисы могут иметь разное количество комнат.
  */
-public class Office implements Space, Serializable {
+public class Office implements Space, Serializable, Cloneable {
     public static final int DEFAULT_ROOMSAMOUNT = 1;
     public static final double DEFAULT_AREA = 250;
 
@@ -119,5 +119,18 @@ public class Office implements Space, Serializable {
 		if (roomsAmount != other.roomsAmount)
 			return false;
 		return true;
+	}
+	
+	/**
+	 * Добавьте в интерфейс и классы помещений метод Object clone().
+	 * Клонирование должно быть глубоким.
+	 */
+	@Override
+	public Object clone() {
+		Object result = null;
+		try {
+			result = super.clone();
+		} catch (CloneNotSupportedException e) {}
+		return result;
 	}
 }

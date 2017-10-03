@@ -14,6 +14,8 @@ package buildings.interfaces;
  * получения лучшего помещения на этаже.
  * Классы, соответственно, должны реализовывать интерфейс и работать со ссылками типа Space (с возможностью, например, добавить на жилой этаж офисное помещение).
  * Рекомендуется использовать возможности рефакторинга среды разработки.
+ * Добавьте в интерфейс и классы помещений метод Object clone(). 
+ * Клонирование должно быть глубоким.
  */
 public interface Floor {
 	public int getSpacesAmount();
@@ -25,4 +27,5 @@ public interface Floor {
 	public void addSpace(int index, Space space);
 	public void removeSpace(int index);
 	public Space getBestSpace();
+	public Object clone();
 }
