@@ -127,10 +127,12 @@ public class Flat implements Space, Serializable, Cloneable {
 		 * Клонирование должно быть глубоким.
 		 */
 		public Object clone() {
-			Object result = null;
+			Flat result = null;
 			try {
-				result = super.clone();
-			} catch (CloneNotSupportedException e) {}
+				result = (Flat) super.clone();
+			} catch (CloneNotSupportedException e) {
+				throw new InternalError();
+			}
 			return result;
 		}
 }

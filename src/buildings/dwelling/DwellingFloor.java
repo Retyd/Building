@@ -12,7 +12,7 @@ import exceptions.SpaceIndexOutOfBoundsException;
  * Номер квартиры явно не хранится.
  * Нумерация квартир на этаже сквозная и начинается с нуля.
  */
-public class DwellingFloor implements Floor, Serializable {
+public class DwellingFloor implements Floor, Serializable, Cloneable {
     protected Flat[] flats;
     
     /**
@@ -182,5 +182,19 @@ public class DwellingFloor implements Floor, Serializable {
 		return true;
 	}
     
-    
+	/**
+	 * Добавьте в интерфейс и классы этажей метод Object clone(). 
+	 * Клонирование должно быть глубоким.
+	 */
+	@Override
+	public Object clone() {
+		Floor result = null;
+		try {
+			result = (Floor) super.clone();
+			System.out.println(result.getSpacesAmount());
+		} catch (CloneNotSupportedException e) {
+			throw new InternalError();
+		}
+		return result;
+	}
 }

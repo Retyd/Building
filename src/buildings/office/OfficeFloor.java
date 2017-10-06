@@ -10,7 +10,7 @@ import exceptions.SpaceIndexOutOfBoundsException;
  * Работа класса должна быть основана на односвязном циклическом списке офисов с выделенной головой.
  * Номер офиса явно не хранится.
  */
-public class OfficeFloor implements Floor, Serializable {
+public class OfficeFloor implements Floor, Serializable, Cloneable {
 	private static class Node{
 		Node next;
 		Office anOffice;
@@ -245,5 +245,18 @@ public class OfficeFloor implements Floor, Serializable {
 		return true;
 	}  
     
-    
+	/**
+	 * Добавьте в интерфейс и классы этажей метод Object clone(). 
+	 * Клонирование должно быть глубоким.
+	 */
+	public Object clone() {
+		Object result = null;
+		try {
+			result = super.clone();
+			
+		} catch (CloneNotSupportedException e) {
+			throw new InternalError();
+		}
+		return result;
+	}
 }
