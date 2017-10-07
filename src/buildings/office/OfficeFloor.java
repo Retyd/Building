@@ -1,6 +1,7 @@
 package buildings.office;
 import java.io.Serializable;
 
+import buildings.dwelling.Flat;
 import buildings.interfaces.Floor;
 import buildings.interfaces.Space;
 import exceptions.SpaceIndexOutOfBoundsException;
@@ -249,11 +250,14 @@ public class OfficeFloor implements Floor, Serializable, Cloneable {
 	 * Добавьте в интерфейс и классы этажей метод Object clone(). 
 	 * Клонирование должно быть глубоким.
 	 */
+	@Override
 	public Object clone() {
-		Object result = null;
+		Floor result = null;
 		try {
-			result = super.clone();
-			
+			result = (Floor) super.clone();
+			for(int i = 0; i < result.getSpacesAmount(); i++) {
+				result.setSpace(i, (Space)result.getSpace(i).clone());
+			}
 		} catch (CloneNotSupportedException e) {
 			throw new InternalError();
 		}

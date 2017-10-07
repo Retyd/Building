@@ -191,7 +191,9 @@ public class DwellingFloor implements Floor, Serializable, Cloneable {
 		Floor result = null;
 		try {
 			result = (Floor) super.clone();
-			System.out.println(result.getSpacesAmount());
+			for(int i = 0; i < result.getSpacesAmount(); i++) {
+				result.setSpace(i, (Space)result.getSpace(i).clone());
+			}
 		} catch (CloneNotSupportedException e) {
 			throw new InternalError();
 		}

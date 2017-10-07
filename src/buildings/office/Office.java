@@ -127,9 +127,9 @@ public class Office implements Space, Serializable, Cloneable {
 	 */
 	@Override
 	public Object clone() {
-		Office result = null;
+		Object result = null;
 		try {
-			result = (Office) super.clone();
+			result = super.clone();
 		} catch (CloneNotSupportedException e) {
 			throw new InternalError();
 		}

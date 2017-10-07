@@ -353,5 +353,24 @@ public class OfficeBuilding implements Building, Serializable {
 		return true;
 	}
     
-    
+	/**
+	 * Добавьте в интерфейс и классы зданий метод Object clone(). 
+	 * Клонирование должно быть глубоким.
+	 */
+	@Override
+	public Object clone() {
+		Building result = null;
+		try {
+			result = (Building) super.clone();
+			for(int i = 0; i < result.getFloorsAmount(); i++) {
+				result.setFloor(i, (Floor)result.getFloor(i).clone());
+				for(int j = 0; j < result.getFloor(i).getSpacesAmount(); i++) {
+					result.getFloor(i).setSpace(j, (Space)result.getSpace(j).clone());
+				}
+			}
+		} catch (CloneNotSupportedException e) {
+			throw new InternalError();
+		}
+		return result;
+	}
 }

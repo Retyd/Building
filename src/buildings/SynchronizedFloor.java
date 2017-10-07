@@ -80,4 +80,18 @@ public class SynchronizedFloor implements Floor {
 	public synchronized boolean equals(Object obj) {
 		return floor.equals(obj);
 	}
+	
+	@Override
+	public synchronized Object clone() {
+		Floor result = null;
+		try {
+			result = (Floor) super.clone();
+			for(int i = 0; i < result.getSpacesAmount(); i++) {
+				result.setSpace(i, (Space)result.getSpace(i).clone());
+			}
+		} catch (CloneNotSupportedException e) {
+			throw new InternalError();
+		}
+		return result;
+	}
 }

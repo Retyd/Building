@@ -19,7 +19,7 @@ package buildings.interfaces;
  * Классы зданий, соответственно, должны реализовывать интерфейс и работать со ссылками типа Space и Floor 
  * (с возможностью, например, заменить в офисном здании этаж на жилой).
  * Рекомендуется использовать возможности рефакторинга среды разработки.
- * Добавьте в интерфейс и классы помещений метод Object clone(). 
+ * Добавьте в интерфейс и классы зданий метод Object clone(). 
  * Клонирование должно быть глубоким.
  */
 public interface Building {
@@ -36,4 +36,5 @@ public interface Building {
 	public void removeSpace(int index);
 	public Space getBestSpace();
 	public Space[] getSpaceArraySorted();
+	public Object clone();
 }

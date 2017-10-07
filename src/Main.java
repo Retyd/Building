@@ -52,10 +52,13 @@ public class Main {
     	repairer.start();*/    	
     	
     	//тест синхронизованных потоков
-    	MySemaphore sem = new MySemaphore();
+    	/*MySemaphore sem = new MySemaphore();
     	Thread repairer = new Thread(new SequentalRepairer(testDwellingFloor, sem));
     	Thread cleaner = new Thread(new SequentalCleaner(testDwellingFloor, sem));    	
     	repairer.start();
-    	cleaner.start();
+    	cleaner.start();*/
+    	
+    	DwellingFloor testClone = (DwellingFloor) testDwellingFloor.clone();
+    	System.out.println(testClone.toString());
     }
 }
