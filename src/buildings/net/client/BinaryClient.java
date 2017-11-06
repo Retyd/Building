@@ -21,8 +21,15 @@
  */
 package buildings.net.client;
 
+import java.io.File;
+
 public class BinaryClient {
 	public static void main (String[] args) {
-		                   
+		File buildingInfoFile = new File(args[0]);
+		File buildingTypeFile = new File(args[1]);
+		File buildingCostFileOutput = new File(args[2]);
+		/*for(int i = 0; i < args.length; i++) {
+			System.out.println(i + ": " + args[i]);
+		}*/
 	}
 }
