@@ -21,15 +21,24 @@
  */
 package buildings.net.client;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.net.Socket;
 
 public class BinaryClient {
-	public static void main (String[] args) {
+	public static void main (String[] args) throws IOException {
 		File buildingInfoFile = new File(args[0]);
 		File buildingTypeFile = new File(args[1]);
 		File buildingCostFileOutput = new File(args[2]);
-		/*for(int i = 0; i < args.length; i++) {
-			System.out.println(i + ": " + args[i]);
-		}*/
+		
+		Socket socket = new Socket();
+		DataInputStream dis = new DataInputStream(socket.getInputStream());
+		DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+		
+		while(!socket.isOutputShutdown()) {
+			//здесь когда-нибудь будет код
+		}
 	}
 }
