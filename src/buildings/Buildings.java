@@ -32,9 +32,9 @@ public class Buildings {
 	 * замените прямое создание экземпляров объектов на вызов методов 
 	 * фабрики.
 	 */
-	private static BuildingFactory buildingFactory = new DwellingFactory();
+	public static BuildingFactory buildingFactory = new DwellingFactory();
 	
-	public void setBuildingFactory(BuildingFactory buildingFactory) {
+	public static void setBuildingFactory(BuildingFactory buildingFactory) {
 		Buildings.buildingFactory = buildingFactory;
 	}
 	

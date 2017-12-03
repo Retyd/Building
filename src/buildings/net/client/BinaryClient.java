@@ -24,21 +24,48 @@ package buildings.net.client;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.net.Socket;
+import java.util.Scanner;
+
+import buildings.Buildings;
+import buildings.factory.DwellingFactory;
+import buildings.factory.HotelFactory;
+import buildings.factory.OfficeFactory;
+import buildings.interfaces.Building;
 
 public class BinaryClient {
-	public static void main (String[] args) throws IOException {
-		File buildingInfoFile = new File(args[0]);
-		File buildingTypeFile = new File(args[1]);
-		File buildingCostFileOutput = new File(args[2]);
+	public static void main (String[] args) throws IOException, InterruptedException {
+		File buildingType = new File(args[0]);
+		Scanner type = new Scanner(buildingType);		
+		
+		File buildingInfo = new File(args[1]);
+		Scanner info = new Scanner(buildingInfo);
+		
+		File buildingCost = new File(args[2]);
 		
 		Socket socket = new Socket();
 		DataInputStream dis = new DataInputStream(socket.getInputStream());
 		DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
 		
+		Reader in = new FileReader(buildingInfo);
+		while(type.hasNext()) {
+			String t = new String(type.next());
+			dos.writeBytes(t);
+			switch (t) {
+			case "Hotel" : Buildings.setBuildingFactory(new HotelFactory());
+			case "OfficeBuilding": Buildings.setBuildingFactory(new OfficeFactory()); 
+			case "Dwelling" : Buildings.setBuildingFactory(new DwellingFactory());
+			}
+			Building building = Buildings.readBuilding(in);
+			Buildings.outputBuilding(building, dos);
+		}
+				
 		while(!socket.isOutputShutdown()) {
-			//здесь когда-нибудь будет код
+			dos.flush();
+			Thread.sleep(1000);
 		}
 	}
 }

@@ -20,6 +20,11 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import buildings.Buildings;
+import buildings.factory.HotelFactory;
+import buildings.factory.OfficeFactory;
+import buildings.interfaces.Building;
+
 public class BinaryServer {
 	public static void main(String[] args) throws IOException {
 		ServerSocket server = new ServerSocket();
@@ -29,15 +34,12 @@ public class BinaryServer {
 		DataOutputStream out = new DataOutputStream(client.getOutputStream());
 		
 		while(!client.isClosed()) {
-			String entry = in.readUTF();
-			
-			//здесь когда-нибудь будет метод оценки стоимости здания
 			
 			out.flush();
-			
-			in.close();
-			out.close();
-			client.close();
 		}
+		in.close();
+		out.close();
+		client.close();
+		System.out.println("Connection and channels were closed");
 	}
 }
