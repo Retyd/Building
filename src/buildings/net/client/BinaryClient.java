@@ -24,8 +24,10 @@ package buildings.net.client;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.Reader;
 import java.net.Socket;
 import java.util.Scanner;
@@ -44,14 +46,17 @@ public class BinaryClient {
 		File buildingInfo = new File(args[1]);
 		Scanner info = new Scanner(buildingInfo);
 		
-		File buildingCost = new File(args[2]);
+		File buildingCosts = new File(args[2]);
+		FileOutputStream fos = new FileOutputStream(buildingCosts);
+   	 	PrintStream writeCostInFile = new PrintStream(fos);    	 
 		
 		Socket socket = new Socket();
 		DataInputStream dis = new DataInputStream(socket.getInputStream());
 		DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
 		
 		Reader in = new FileReader(buildingInfo);
-		while(type.hasNext()) {
+		
+		while(type.hasNext() && !socket.isOutputShutdown()) {
 			String t = new String(type.next());
 			dos.writeBytes(t);
 			switch (t) {
@@ -61,11 +66,14 @@ public class BinaryClient {
 			}
 			Building building = Buildings.readBuilding(in);
 			Buildings.outputBuilding(building, dos);
-		}
-				
-		while(!socket.isOutputShutdown()) {
 			dos.flush();
 			Thread.sleep(1000);
+			writeCostInFile.println((dis.read()));
 		}
+		
+		writeCostInFile.close();
+		dis.close();
+		dos.close();
+		in.close();
 	}
 }
