@@ -60,9 +60,9 @@ public class BinaryClient {
 			String t = new String(type.next());
 			dos.writeBytes(t);
 			switch (t) {
-			case "Hotel" : Buildings.setBuildingFactory(new HotelFactory());
-			case "OfficeBuilding": Buildings.setBuildingFactory(new OfficeFactory()); 
-			case "Dwelling" : Buildings.setBuildingFactory(new DwellingFactory());
+				case "Hotel" : Buildings.setBuildingFactory(new HotelFactory());
+				case "OfficeBuilding": Buildings.setBuildingFactory(new OfficeFactory()); 
+				case "Dwelling" : Buildings.setBuildingFactory(new DwellingFactory());
 			}
 			Building building = Buildings.readBuilding(in);
 			Buildings.outputBuilding(building, dos);

@@ -28,13 +28,13 @@ import buildings.interfaces.Building;
 
 public class BinaryServer {
 	private static double value(String type, Building theBuilding) {
-		double result = theBuilding.getSpacesArea();		
+		double multiplier = 0;		
 		switch (type) {
-		case "Hotel" : result *= 2000;
-		case "OfficeBuilding": result *= 1500; 
-		case "Dwelling" : result *= 1000;
+		case "Hotel" : multiplier = 2000;
+		case "OfficeBuilding": multiplier = 1500; 
+		case "Dwelling" : multiplier = 1000;
 		}
-		return result;
+		return theBuilding.getSpacesArea() * multiplier;
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -47,9 +47,9 @@ public class BinaryServer {
 		while(!client.isClosed()) {
 			String t = new String(in.readUTF()); 
 			switch (t) {
-			case "Hotel" : Buildings.setBuildingFactory(new HotelFactory());
-			case "OfficeBuilding": Buildings.setBuildingFactory(new OfficeFactory()); 
-			case "Dwelling" : Buildings.setBuildingFactory(new DwellingFactory());
+				case "Hotel" : Buildings.setBuildingFactory(new HotelFactory());
+				case "OfficeBuilding": Buildings.setBuildingFactory(new OfficeFactory()); 
+				case "Dwelling" : Buildings.setBuildingFactory(new DwellingFactory());
 			}
 			Building theBuilding = Buildings.inputBuilding(in);		
 			out.writeDouble(value(t, theBuilding));			
@@ -57,6 +57,5 @@ public class BinaryServer {
 		}
 		in.close();
 		out.close();
-		client.close();
 	}
 }
