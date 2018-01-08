@@ -19,15 +19,41 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Random;
 
 import buildings.Buildings;
 import buildings.factory.DwellingFactory;
 import buildings.factory.HotelFactory;
 import buildings.factory.OfficeFactory;
 import buildings.interfaces.Building;
+import exceptions.BuildingUnderArrestException;
+import exceptions.FloorIndexOutOfBoundsException;
 
 public class BinaryServer {
-	private static double value(String type, Building theBuilding) {
+	/**
+	 * Включите в начало метода оценки стоимости проверку на то, 
+	 * не наложен ли на здание арест, и реализуйте в классе сервера 
+	 * метод проверки ареста здания. В рамках учебного задания для простоты будем считать, 
+	 * что метод проверки использует датчик случайных чисел и в среднем сообщает об аресте 
+	 * здания в 10% случаев.
+	 * Метод оценки стоимости в случае ареста здания должен выбросить 
+	 * объявляемое исключение BuildingUnderArrestException 
+	 * (также опишите класс этого исключения). 
+	 * Клиенту же в таком случае вместо оценки стоимости следует отправить сообщение 
+	 * об аресте здания.
+	 */
+	private static boolean isArrested() {
+		Random random = new Random();
+		int res = random.nextInt(101);
+		if(res > 10) return true;
+		return false;
+	}
+	
+	private static double value(String type, Building theBuilding) throws BuildingUnderArrestException {
+		if (isArrested()) {
+			throw new BuildingUnderArrestException("The building is under arrest");
+		}
+		
 		double multiplier = 0;		
 		switch (type) {
 		case "Hotel" : multiplier = 2000;
@@ -37,7 +63,7 @@ public class BinaryServer {
 		return theBuilding.getSpacesArea() * multiplier;
 	}
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, BuildingUnderArrestException {
 		ServerSocket server = new ServerSocket();
 		Socket client = server.accept();
 		
