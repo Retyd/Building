@@ -31,48 +31,47 @@ public class BinaryServer {
 		}
 		
 		@Override
-	    public void run() {
+		public void run() {
 			try {
 				DataOutputStream out = new DataOutputStream(clientDialog.getOutputStream());
 				DataInputStream in = new DataInputStream(clientDialog.getInputStream());
-		        while (!clientDialog.isClosed()) {
-		        	String t = new String(in.readUTF()); 
-					switch (t) {
-						case "Hotel" : Buildings.setBuildingFactory(new HotelFactory());
-						case "OfficeBuilding": Buildings.setBuildingFactory(new OfficeFactory()); 
-						case "Dwelling" : Buildings.setBuildingFactory(new DwellingFactory());
-					}
-					Building theBuilding = Buildings.inputBuilding(in);		
-					out.writeDouble(value(t, theBuilding));			
-					out.flush();
-		        }
-	
-		        in.close();
-		        out.close();
-		        clientDialog.close();
-		    } catch (IOException | BuildingUnderArrestException e) {
-	            e.printStackTrace();
-	        }
+		        	while (!clientDialog.isClosed()) {
+		        		String t = new String(in.readUTF()); 
+						switch (t) {
+							case "Hotel" : Buildings.setBuildingFactory(new HotelFactory());
+							case "OfficeBuilding": Buildings.setBuildingFactory(new OfficeFactory()); 
+							case "Dwelling" : Buildings.setBuildingFactory(new DwellingFactory());
+						}
+						Building theBuilding = Buildings.inputBuilding(in);		
+						out.writeDouble(value(t, theBuilding));			
+						out.flush();
+		        	}
+				in.close();
+		        	out.close();
+		        	clientDialog.close();
+			} catch (IOException | BuildingUnderArrestException e) {
+	            		e.printStackTrace();
+			}
 		}
-    }
+	}
     
-    private static boolean isArrested() {
+	private static boolean isArrested() {
 		Random random = new Random();
 		int res = random.nextInt(101);
 		if(res > 10) return true;
 		return false;
 	}
     
-    private static double value(String type, Building theBuilding) throws BuildingUnderArrestException {
+	private static double value(String type, Building theBuilding) throws BuildingUnderArrestException {
 		if (isArrested()) {
 			throw new BuildingUnderArrestException("The building is under arrest");
 		}
 		
 		double multiplier = 0;		
 		switch (type) {
-		case "Hotel" : multiplier = 2000;
-		case "OfficeBuilding": multiplier = 1500; 
-		case "Dwelling" : multiplier = 1000;
+			case "Hotel" : multiplier = 2000;
+			case "OfficeBuilding": multiplier = 1500; 
+			case "Dwelling" : multiplier = 1000;
 		}
 		return theBuilding.getSpacesArea() * multiplier;
 	}
