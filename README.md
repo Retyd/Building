@@ -16,4 +16,4 @@
 В [этом](src/buildings/threads) пакете лежат классы потоков. Два из них ([SequentalRepairer](src/buildings/threads/SequentalRepairer.java) и [SequentalCleaner](src/buildings/threads/SequentalCleaner.java)) синхронизированы (с помощью очень-очень простого вспомогательного [класса-семафора](src/buildings/threads/MySemaphore.java)).  
 [SynchronizedFloor](src/buildings/SynchronizedFloor.java) - класс-декоратор, реализующий с обеспечением синхронизации методы интерфейса Floor, а также переопределяющий ряд методов класса Object.   
   
-Есть однопоточный [сервер](src/buildings/net/server/sequental/BinaryServer.java), производящий оценку здания на основе информации, передаваемой ему [клиентом](src/buildings/net/client/BinaryClient.java).  
+Есть [однопоточный](src/buildings/net/server/sequental/BinaryServer.java) и [многопоточный](src/buildings/net/server/parallel/BinaryServer.java) серверы, производящие оценку здания на основе информации, передаваемой ему [клиентом](src/buildings/net/client/BinaryClient.java).  
