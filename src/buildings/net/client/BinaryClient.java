@@ -44,19 +44,22 @@ public class BinaryClient {
 		Scanner type = new Scanner(buildingType);		
 		
 		File buildingInfo = new File(args[1]);
-		Scanner info = new Scanner(buildingInfo);
+		Reader in = new FileReader(buildingInfo);
 		
 		File buildingCosts = new File(args[2]);
 		FileOutputStream fos = new FileOutputStream(buildingCosts);
    	 	PrintStream writeCostInFile = new PrintStream(fos);    	 
-		
-		Socket socket = new Socket();
+				
+   	 	Socket socket = new Socket();
 		DataInputStream dis = new DataInputStream(socket.getInputStream());
 		DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
 		
-		Reader in = new FileReader(buildingInfo);
+		System.out.println("Client connected to socket.");
+		System.out.println("Client writing channel & reading channel initialized.");   
+	
 		
 		while(type.hasNext() && !socket.isOutputShutdown()) {
+			System.out.println("Client start reading info about some building...");
 			String t = new String(type.next());
 			dos.writeBytes(t);
 			switch (t) {
@@ -67,13 +70,16 @@ public class BinaryClient {
 			Building building = Buildings.readBuilding(in);
 			Buildings.outputBuilding(building, dos);
 			dos.flush();
+			System.out.println("Client sent message to server.");
 			Thread.sleep(1000);
 			writeCostInFile.println((dis.read()));
-		}
+			System.out.println("Client read message from server and wrote it in the file.");
+		}		
 		
 		writeCostInFile.close();
 		dis.close();
 		dos.close();
 		in.close();
+		System.out.println("Closing connections & channels on clentSide - DONE.");
 	}
 }

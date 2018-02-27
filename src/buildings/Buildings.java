@@ -10,9 +10,6 @@ import java.io.Reader;
 import java.io.StreamTokenizer;
 import java.io.Writer;
 
-import buildings.dwelling.Dwelling;
-import buildings.dwelling.DwellingFloor;
-import buildings.dwelling.Flat;
 import buildings.factory.DwellingFactory;
 import buildings.interfaces.Building;
 import buildings.interfaces.BuildingFactory;

@@ -35,21 +35,27 @@ public class BinaryServer {
 			try {
 				DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
 				DataInputStream in = new DataInputStream(clientSocket.getInputStream());
-		        while (!clientSocket.isClosed()) {
+				System.out.println("Server writing channel & reading channel initialized.");   
+				
+				while (!clientSocket.isClosed()) {
+					System.out.println("Server reading from channel.");
 		        	String t = new String(in.readUTF()); 
 					switch (t) {
 						case "Hotel" : Buildings.setBuildingFactory(new HotelFactory());
 						case "OfficeBuilding": Buildings.setBuildingFactory(new OfficeFactory()); 
 						case "Dwelling" : Buildings.setBuildingFactory(new DwellingFactory());
 					}
-					Building theBuilding = Buildings.inputBuilding(in);		
+					Building theBuilding = Buildings.inputBuilding(in);	
+					System.out.println("Server writing to channel...");
 					out.writeDouble(value(t, theBuilding));			
 					out.flush();
+					System.out.println("Server wrote message in channel.");
 		        }
 	
 		        in.close();
 		        out.close();
 		        clientSocket.close();
+		        System.out.println("Closing connections & channels on serverSide - DONE.");
 		    } catch (IOException | BuildingUnderArrestException e) {
 	            e.printStackTrace();
 	        }
@@ -79,10 +85,15 @@ public class BinaryServer {
     
     public static void main(String[] args) throws IOException {
     	ServerSocket server = new ServerSocket();
+    	
     	while (!server.isClosed()) {
     		Socket client = server.accept();
+    		System.out.print("Connection accepted.");
+    		
     		executeIt.execute(new Server(client));                
     	}
-            executeIt.shutdown();
+    	
+    	executeIt.shutdown();
+    	System.out.println("ALL connections & channels on serverSide were closed.");
     }
 }

@@ -56,9 +56,9 @@ public class BinaryServer {
 		
 		double multiplier = 0;		
 		switch (type) {
-		case "Hotel" : multiplier = 2000;
-		case "OfficeBuilding": multiplier = 1500; 
-		case "Dwelling" : multiplier = 1000;
+			case "Hotel" : multiplier = 2000;
+			case "OfficeBuilding": multiplier = 1500; 
+			case "Dwelling" : multiplier = 1000;
 		}
 		return theBuilding.getSpacesArea() * multiplier;
 	}
@@ -66,22 +66,28 @@ public class BinaryServer {
 	public static void main(String[] args) throws IOException, BuildingUnderArrestException {
 		ServerSocket server = new ServerSocket();
 		Socket client = server.accept();
+		System.out.print("Connection accepted.");
 		
 		DataInputStream in = new DataInputStream(client.getInputStream());
 		DataOutputStream out = new DataOutputStream(client.getOutputStream());
+		System.out.println("Server writing channel & reading channel initialized.");   
 		
 		while(!client.isClosed()) {
-			String t = new String(in.readUTF()); 
+			System.out.println("Server reading from channel.");
+			String t = new String(in.readUTF());
 			switch (t) {
 				case "Hotel" : Buildings.setBuildingFactory(new HotelFactory());
 				case "OfficeBuilding": Buildings.setBuildingFactory(new OfficeFactory()); 
 				case "Dwelling" : Buildings.setBuildingFactory(new DwellingFactory());
 			}
-			Building theBuilding = Buildings.inputBuilding(in);		
+			Building theBuilding = Buildings.inputBuilding(in);
+			System.out.println("Server writing to channel...");
 			out.writeDouble(value(t, theBuilding));			
 			out.flush();
+			System.out.println("Client wrote message in channel.");
 		}
 		in.close();
 		out.close();
+		System.out.println("Closing connections & channels on serverSide - DONE.");
 	}
 }
