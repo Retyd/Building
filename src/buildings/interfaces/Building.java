@@ -16,25 +16,38 @@ package buildings.interfaces;
  * удаления помещения из здания,
  * получения лучшего помещения в здании,
  * получения отсортированного массива всех помещений.
- * Классы зданий, соответственно, должны реализовывать интерфейс и работать со ссылками типа Space и Floor 
+ * Классы зданий, соответственно, должны реализовывать интерфейс и работать со ссылками типа Space и Floor
  * (с возможностью, например, заменить в офисном здании этаж на жилой).
  * Рекомендуется использовать возможности рефакторинга среды разработки.
- * Добавьте в интерфейс и классы зданий метод Object clone(). 
+ * Добавьте в интерфейс и классы зданий метод Object clone().
  * Клонирование должно быть глубоким.
  */
 public interface Building {
-	public int getFloorsAmount();
-	public int getSpacesAmount();
-	public double getSpacesArea();
-	public int getRoomsAmount();
-	public Floor[] getFloorsArray();
-	public Floor getFloor(int index);
-	public void setFloor(int index, Floor oneFloor);
-	public Space getSpace(int index);
-	public void setSpace(int index, Space oneSpace);
-	public void addSpace(int index, Space oneSpace);
-	public void removeSpace(int index);
-	public Space getBestSpace();
-	public Space[] getSpaceArraySorted();
-	public Object clone();
+    public int getFloorsAmount();
+
+    public int getSpacesAmount();
+
+    public double getSpacesArea();
+
+    public int getRoomsAmount();
+
+    public Floor[] getFloorsArray();
+
+    public Floor getFloor(int index);
+
+    public void setFloor(int index, Floor oneFloor);
+
+    public Space getSpace(int index);
+
+    public void setSpace(int index, Space oneSpace);
+
+    public void addSpace(int index, Space oneSpace);
+
+    public void removeSpace(int index);
+
+    public Space getBestSpace();
+
+    public Space[] getSpaceArraySorted();
+
+    public Object clone();
 }

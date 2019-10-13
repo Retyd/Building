@@ -1,7 +1,7 @@
 package buildings.interfaces;
 
 /**
- * Создайте интерфейс Floor этажа здания, работающий со ссылками типа Space. 
+ * Создайте интерфейс Floor этажа здания, работающий со ссылками типа Space.
  * Интерфейс должен соответствовать общей функциональности DwellingFloor и OfficeFloor и должен содержать следующие  методы:
  * получения количества помещений на этаже,
  * получения общей площади помещений на этаже,
@@ -14,18 +14,27 @@ package buildings.interfaces;
  * получения лучшего помещения на этаже.
  * Классы, соответственно, должны реализовывать интерфейс и работать со ссылками типа Space (с возможностью, например, добавить на жилой этаж офисное помещение).
  * Рекомендуется использовать возможности рефакторинга среды разработки.
- * Добавьте в интерфейс и классы этажей метод Object clone(). 
+ * Добавьте в интерфейс и классы этажей метод Object clone().
  * Клонирование должно быть глубоким.
  */
 public interface Floor {
-	public int getSpacesAmount();
-	public double getSpacesArea();
-	public int getRoomsAmount();
-	public Space[] getSpaceArray();
-	public Space getSpace(int index);
-	public void setSpace(int index, Space space);
-	public void addSpace(int index, Space space);
-	public void removeSpace(int index);
-	public Space getBestSpace();
-	public Object clone();
+    public int getSpacesAmount();
+
+    public double getSpacesArea();
+
+    public int getRoomsAmount();
+
+    public Space[] getSpaceArray();
+
+    public Space getSpace(int index);
+
+    public void setSpace(int index, Space space);
+
+    public void addSpace(int index, Space space);
+
+    public void removeSpace(int index);
+
+    public Space getBestSpace();
+
+    public Object clone();
 }

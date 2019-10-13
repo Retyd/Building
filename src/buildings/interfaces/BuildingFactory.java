@@ -1,5 +1,5 @@
 /**
- * Создайте интерфейс BuildingFactory, содержащий методы: 
+ * Создайте интерфейс BuildingFactory, содержащий методы:
  * public Space createSpace(double area)
  * public Space createSpace(int roomsCount, double area)
  * public Floor createFloor(int spacesCount)
@@ -10,10 +10,15 @@
 package buildings.interfaces;
 
 public interface BuildingFactory {
-	public Space createSpace(double area);
-	public Space createSpace(int roomsCount, double area);
-	public Floor createFloor(int spacesCount);
-	public Floor createFloor(Space[] spaces);
-	public Building createBuilding(int floorsCount, int[] spacesCounts);
-	public Building createBuilding(Floor[] floors);
+    public Space createSpace(double area);
+
+    public Space createSpace(int roomsCount, double area);
+
+    public Floor createFloor(int spacesCount);
+
+    public Floor createFloor(Space[] spaces);
+
+    public Building createBuilding(int floorsCount, int[] spacesCounts);
+
+    public Building createBuilding(Floor[] floors);
 }
